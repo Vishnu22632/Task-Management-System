@@ -1,0 +1,5 @@
+com/synergytech/tms/bean/UserBean.class
+com/synergytech/tms/model/User.class
+com/synergytech/tms/repository/UserRepository.class
+com/synergytech/tms/JAXRSConfiguration.class
+com/synergytech/tms/resources/JavaEE8Resource.class

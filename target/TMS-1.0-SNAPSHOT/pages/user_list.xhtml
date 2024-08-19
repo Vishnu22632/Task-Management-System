@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>User List</title>
+</h:head>
+<h:body>
+    <h:form>
+        <p:dataTable value="#{userBean.users}" var="user" editable="true">
+            <p:column headerText="Name">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{user.name}" /></f:facet>
+                    <f:facet name="input"><p:inputText value="#{user.name}" /></f:facet>
+                </p:cellEditor>
+            </p:column>
+
+            <p:column headerText="Email">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{user.email}" /></f:facet>
+                    <f:facet name="input"><p:inputText value="#{user.email}" /></f:facet>
+                </p:cellEditor>
+            </p:column>
+
+            <p:column headerText="Password">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{user.password}" /></f:facet>
+                    <f:facet name="input"><p:inputText value="#{user.password}" /></f:facet>
+                </p:cellEditor>
+            </p:column>
+
+            <p:column headerText="Actions">
+                <p:commandButton value="Delete" action="#{userBean.deleteUser(user.id)}"  />
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</h:body>
+</html>
