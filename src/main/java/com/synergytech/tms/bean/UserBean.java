@@ -2,11 +2,13 @@ package com.synergytech.tms.bean;
 
 import com.synergytech.tms.model.User;
 import com.synergytech.tms.repository.UserRepository;
+import java.io.IOException;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 @Named
 @RequestScoped
@@ -20,7 +22,8 @@ public class UserBean {
 
     public String createUser() {
         userRepository.createUser(user);
-        user = new User(); // Reset the form
+        // Reset the form
+        user = new User();
         return "user_list?faces-redirect=true";
     }
 
@@ -48,4 +51,23 @@ public class UserBean {
     public void setUser(User user) {
         this.user = user;
     }
+
+    // redirect to signupForm
+    public void register() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("signupForm.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    // redirect to loginForm
+    public void login() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("loginForm.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

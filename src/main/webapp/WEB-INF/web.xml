@@ -25,6 +25,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>pages/userForm.xhtml</welcome-file>
+        <welcome-file>pages/signupForm.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

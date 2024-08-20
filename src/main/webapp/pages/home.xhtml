@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <!--************************Menu************************-->
+        <ui:include src="menu.xhtml"/>
+
+
+        <h:form>
+
+            <p:growl showDetail="true" >
+                <p:autoUpdate />
+            </p:growl>
+
+            <p:panelMenu style="width: 350px" >
+                
+<!--                <p:submenu label="Dashboard">
+                    <p:menuitem value="File" action="#{menuView.file}"  />
+                    <p:menuitem value="Video" action="#{menuView.video()}" />
+                </p:submenu>-->
+
+
+                <p:submenu label="Dashboard" />
+                
+                <p:submenu label="Projects">
+                    <p:menuitem value="Add New Project" />
+                    <p:menuitem value="List Projects" />
+                </p:submenu>
+                
+                <p:submenu label="Task" />
+                
+                <p:submenu label="Report" />
+                
+                <p:submenu label="User List">
+                    <p:menuitem value="Add New User" />
+                    <p:menuitem value="List Users" outcome="user_list.xhtml" />
+                </p:submenu>
+                
+<!--                <p:submenu label="Activity Tracker">
+                    <p:menuitem value="Home" url="" />
+                    <p:menuitem value="Signup" url="" />
+                    <p:menuitem value="Login" url="" />
+
+                </p:submenu>-->
+
+
+            </p:panelMenu>
+        </h:form>
+
+
+    </h:body>
+</html>
