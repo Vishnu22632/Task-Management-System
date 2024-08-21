@@ -66,11 +66,10 @@
 
                     <p:column headerText="Actions">
 
-                        <!--edit user-->
-                        <p:commandButton  icon="pi pi-pencil" action="#{userBean.updateUser(user.id)}"  styleClass="ui-button-danger mr-2" >
-                            <p:confirm header="Confirmation" message="Do you want to delete this record?" icon="pi pi-info-circle"/>
+                        <p:commandButton icon="pi pi-pencil" styleClass="ui-button-danger mr-2" 
+                                         oncomplete="PF('editUserDialog').show()" 
+                                         actionListener="#{userBean.setUser(user)}">
                         </p:commandButton>
-
 
 
 
@@ -93,6 +92,38 @@
 
 
             </h:form>
+
+
+
+
+
+            <!-- Edit User Dialog -->
+            <p:dialog header="Edit User" widgetVar="editUserDialog" modal="true" resizable="false" width="500">
+                <h:form>
+                    <h:panelGrid columns="2" cellpadding="5">
+
+                        <h:outputLabel for="fullName" value="Full Name" />
+                        <p:inputText id="fullName" value="#{userBean.user.fullName}" />
+
+                        <h:outputLabel for="email" value="Email" />
+                        <p:inputText id="email" value="#{userBean.user.email}" />
+
+                        <h:outputLabel for="password" value="Password" />
+                        <p:inputText id="password" value="#{userBean.user.password}" />
+
+                        <h:outputLabel for="userRole" value="User Role" />
+                        <p:inputText id="userRole" value="#{userBean.user.userRole}" />
+
+                        <h:outputLabel for="address" value="Address" />
+                        <p:inputText id="address" value="#{userBean.user.address}" />
+
+                    </h:panelGrid>
+
+                    <p:commandButton value="Save" action="#{userBean.updateUser}" 
+                                     oncomplete="PF('editUserDialog').hide()" />
+                    
+                </h:form>
+            </p:dialog>
 
         </p:card>
 

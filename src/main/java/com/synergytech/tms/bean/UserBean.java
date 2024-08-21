@@ -26,6 +26,11 @@ public class UserBean {
         user = new User();
         return "user_list?faces-redirect=true";
     }
+    
+    
+    public void prepareEditUser(User selectedUser) {
+        this.user = selectedUser;  // Populate the current user object with the selected user's data
+    }
 
     public String updateUser() {
         userRepository.updateUser(user);
