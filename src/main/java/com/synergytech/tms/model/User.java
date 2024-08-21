@@ -86,3 +86,31 @@ public class User implements Serializable {
     
     
 }
+
+
+
+//<datasource jta="true" jndi-name="java:/jboss/datasources/tmsDS" pool-name="tmsDS" enabled="true" use-ccm="true">
+//                    <connection-url>jdbc:mysql://localhost:3306/tmsdb</connection-url>
+//                    <driver-class>com.mysql.cj.jdbc.Driver</driver-class>
+//                    <driver>mysql</driver>
+//                    <security>
+//                        <user-name>vishnu</user-name>
+//                        <password>mahi07</password>
+//                    </security>
+//                    <validation>
+//                        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker"/>
+//                        <background-validation>true</background-validation>
+//                        <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter"/>
+//                    </validation>
+//                </datasource>
+
+
+
+
+
+
+
+
+
+
+

@@ -50,7 +50,7 @@
         <div class="container">
 
 
-        <p:card id="signup-card" style="width: 35rem; margin-top: 3em; " >
+        <p:card id="signup-card" style="width: 35rem; margin-top: 2em; " >
 
             <f:facet name="header">
 
@@ -76,7 +76,6 @@
                         <p:outputLabel for="fullname" value="Full Name: " />
                         <p:inputText id="fullname" value="#{userBean.user.fullName}" required="true" label="fullname"/>
 
-
                         <p:outputLabel for="email" value="Email: "/>
                         <p:inputText id="email" value="#{userBean.user.email}" required="true" label="Email"/>
 
@@ -92,7 +91,7 @@
 
                         <f:facet name="footer">
                             <p:commandButton value="Save" action="#{userBean.createUser}" style="margin-right: 2px;" />
-                            <p:commandButton value="Update" action="#{userBean.updateUser}" />
+                            <p:commandButton type="reset" value="Reset" styleClass="ui-button-danger ml-2" />
                         </f:facet>
 
 

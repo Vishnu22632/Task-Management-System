@@ -15,11 +15,10 @@
 
         <p:card>
 
-            <h:form>
+            <h:form id="userListForm">
                 <p:growl id="message" showDetail="true"/>
 
-                <p:dataTable value="#{userBean.users}" var="user" editable="true">
-
+                <p:dataTable value="#{userBean.users}" var="user" editable="true" id="userTable">
                     <p:column headerText="#">
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{user.id}" /></f:facet>
@@ -66,10 +65,10 @@
 
                     <p:column headerText="Actions">
 
-                        <p:commandButton icon="pi pi-pencil" styleClass="ui-button-danger mr-2" 
-                                         oncomplete="PF('editUserDialog').show()" 
-                                         actionListener="#{userBean.setUser(user)}">
-                        </p:commandButton>
+                        <p:commandButton icon="pi pi-pencil" styleClass="ui-button-info mr-2" 
+                                         action="#{userBean.prepareEditUser(user)}"
+                                         oncomplete="PF('editUserDialog').show()"
+                                         update=":editForm" ajax="true" />
 
 
 
@@ -93,13 +92,9 @@
 
             </h:form>
 
-
-
-
-
             <!-- Edit User Dialog -->
             <p:dialog header="Edit User" widgetVar="editUserDialog" modal="true" resizable="false" width="500">
-                <h:form>
+                <h:form id="editForm">
                     <h:panelGrid columns="2" cellpadding="5">
 
                         <h:outputLabel for="fullName" value="Full Name" />
@@ -119,9 +114,13 @@
 
                     </h:panelGrid>
 
+
+
                     <p:commandButton value="Save" action="#{userBean.updateUser}" 
-                                     oncomplete="PF('editUserDialog').hide()" />
-                    
+                                     oncomplete="PF('editUserDialog').hide()" 
+                                     update=":userListForm:userTable"/>
+
+
                 </h:form>
             </p:dialog>
 
@@ -129,6 +128,40 @@
 
     </h:body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
