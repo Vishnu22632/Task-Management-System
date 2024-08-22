@@ -7,88 +7,99 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>TMS - Home</title>
+        <style>
+            /* Custom styles for the panelMenu */
+            .ui-panelmenu .ui-panelmenu-header {
+                background-color: #4CAF50;
+                color: white;
+            }
+            .ui-panelmenu .ui-menuitem-link {
+                color: #333;
+                font-weight: bold;
+            }
+            .ui-button-danger {
+                background-color: #f44336;
+                border-color: #f44336;
+            }
+            .ui-button-danger:hover {
+                background-color: #d32f2f;
+                border-color: #d32f2f;
+            }
+        </style>
     </h:head>
     <h:body>
 
         <!--************************Menu************************-->
         <ui:include src="menu.xhtml"/>
 
+        <h:form id="panelMenu">
 
-        <h:form>
-
-            <p:growl showDetail="true" >
+            <p:growl showDetail="true">
                 <p:autoUpdate />
             </p:growl>
 
-            <p:panelMenu style="width: 350px" >
+            <p:panel header="Navigation Menu" style="width: 350px;">
+                <p:panelMenu style="width: 100%;" >
 
-                <p:submenu label="Dashboard" />
+                    <p:submenu label="Dashboard" icon="pi pi-fw pi-home" />
 
-                <p:submenu label="Projects">
-                    <p:menuitem value="Add New Project" onclick="PF('projectDialog').show();" />
-                    <p:menuitem value="List Projects" outcome="projectList.xhtml" />
-                </p:submenu>
+                    <p:submenu label="Projects" icon="pi pi-fw pi-briefcase">
+                        <p:menuitem value="Add New Project" icon="pi pi-fw pi-plus" onclick="PF('projectDialog').show();" />
+                        <p:menuitem value="List Projects" icon="pi pi-fw pi-list" outcome="projectList.xhtml" />
+                    </p:submenu>
 
-                <p:submenu label="Task" />
+                    <p:submenu label="Task" icon="pi pi-fw pi-tasks" />
 
-                <p:submenu label="Report" />
+                    <p:submenu label="Report" icon="pi pi-fw pi-chart-bar" />
 
-                <p:submenu label="User List">
-                    <p:menuitem value="Add New User" />
-                    <p:menuitem value="List Users" outcome="user_list.xhtml" />
-                </p:submenu>
+                    <p:submenu label="User List" icon="pi pi-fw pi-users">
+                        <p:menuitem value="Add New User" outcome="signupForm.xhtml" icon="pi pi-fw pi-user-plus" />
+                        <p:menuitem value="List Users" icon="pi pi-fw pi-user" outcome="user_list.xhtml" />
+                    </p:submenu>
 
-
-
-
-            </p:panelMenu>
+                </p:panelMenu>
+            </p:panel>
 
             <!-- Project Form Dialog -->
             <p:dialog header="Add New Project" widgetVar="projectDialog" modal="true" width="600px" responsive="true">
-                <h:panelGrid columns="2" cellpadding="5">
-                    <h:outputLabel for="name" value="Project Name:" />
-                    <p:inputText id="name" size="30" value="#{projectBean.project.name}" required="true" />
+                <p:fieldset legend="Project Details" style="padding:20px;">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel for="name" value="Project Name:" />
+                        <p:inputText id="name" size="30" value="#{projectBean.project.name}" required="true" />
 
-                    <h:outputLabel for="status" value="Status:" />
-                    <p:selectOneMenu  id="status" value="#{projectBean.project.status}">
-                        <f:selectItem itemLabel="Select Status" itemValue="" />
-                        <f:selectItem itemLabel="On-going" itemValue="On-going" />
-                        <f:selectItem itemLabel="Pending" itemValue="Pending" />
-                        <f:selectItem itemLabel="Completed" itemValue="Completed" />
-                    </p:selectOneMenu>
+                        <h:outputLabel for="status" value="Status:" />
+                        <p:selectOneMenu  id="status" value="#{projectBean.project.status}">
+                            <f:selectItem itemLabel="Select Status" itemValue="" />
+                            <f:selectItem itemLabel="On-going" itemValue="On-going" />
+                            <f:selectItem itemLabel="Pending" itemValue="Pending" />
+                            <f:selectItem itemLabel="Completed" itemValue="Completed" />
+                        </p:selectOneMenu>
 
-                    <h:outputLabel for="startDate" value="Start Date:" />
-                    <p:calendar size="30" id="startDate" value="#{projectBean.project.startDate}" pattern="MM/dd/yyyy" />
-                    <h:outputLabel for="endDate" value="End Date:" />
-                    <p:calendar size="30" id="endDate" value="#{projectBean.project.endDate}" pattern="MM/dd/yyyy" />
-                    <h:outputLabel for="manager" value="Project Manager:" />
-                    <p:inputText size="30" id="manager" value="#{projectBean.project.manager}" required="true" />
+                        <h:outputLabel for="startDate" value="Start Date:" />
+                        <p:calendar size="30" id="startDate" value="#{projectBean.project.startDate}" pattern="MM/dd/yyyy" />
+                        <h:outputLabel for="endDate" value="End Date:" />
+                        <p:calendar size="30" id="endDate" value="#{projectBean.project.endDate}" pattern="MM/dd/yyyy" />
+                        <h:outputLabel for="manager" value="Project Manager:" />
+                        <p:inputText size="30" id="manager" value="#{projectBean.project.manager}" required="true" />
 
-                    <h:outputLabel for="teamMembers" value="Team Members:" />
-                    <p:inputText size="30" id="teamMembers" value="#{projectBean.project.teamMembers}"  />
+                        <h:outputLabel for="teamMembers" value="Team Members:" />
+                        <p:inputText size="30" id="teamMembers" value="#{projectBean.project.teamMembers}"  />
 
-                    <h:outputLabel for="description" value="Description:" />
-                    <p:inputTextarea cols="32" id="description" value="#{projectBean.project.description}"  />
-                </h:panelGrid>
-
-
+                        <h:outputLabel for="description" value="Description:" />
+                        <p:inputTextarea cols="32" id="description" value="#{projectBean.project.description}"  />
+                    </h:panelGrid>
+                </p:fieldset>
 
                 <f:facet name="footer">
                     <h:panelGroup layout="block" style="text-align:center;">
-                        <p:commandButton value="ADD Project" action="#{projectBean.saveProject}"  oncomplete="PF('projectDialog').hide()" />
+                        <p:commandButton value="Add Project" action="#{projectBean.saveProject}" styleClass="ui-button-primary" oncomplete="PF('projectDialog').hide()" />
                         <p:commandButton value="Cancel" onclick="PF('projectDialog').hide();" type="button" styleClass="ui-button-danger mr-2" />
                     </h:panelGroup>
                 </f:facet>
 
             </p:dialog>
 
-
-
-
-
-
         </h:form>
-
 
     </h:body>
 </html>
