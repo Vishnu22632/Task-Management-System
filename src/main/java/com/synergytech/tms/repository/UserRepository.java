@@ -41,11 +41,7 @@ public class UserRepository {
         return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
     
-    
-
-    
-    
-    
+  
     // find user by email and password
     public User findUserByEmailAndPassword(String email, String password) {
         try {
@@ -58,9 +54,6 @@ public class UserRepository {
             return null;
         }
     }
-    
-    
-    
     
     
 }

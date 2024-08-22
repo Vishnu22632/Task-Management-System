@@ -2,10 +2,12 @@ package com.synergytech.tms.repository;
 
 import com.synergytech.tms.model.Project;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+@Stateless
 public class ProjectRepository {
 
     @PersistenceContext
@@ -13,40 +15,31 @@ public class ProjectRepository {
 
     @Transactional
     public void save(Project project) {
-        if(project.getId()==null){
+        if (project.getId() == null) {
             entityManager.persist(project);
-        }else{
+        } else {
             entityManager.merge(project);
         }
-        
+
     }
-    
-    public Project findProjectById(Long id){
-       return entityManager.find(Project.class, id);
+
+    public Project findProjectById(Long id) {
+        return entityManager.find(Project.class, id);
     }
-    
-    
 
     @Transactional
-    public void deleteProject(Long id){
-        Project project=findProjectById(id);
-        if(project!=null){
+    public void deleteProject(Long id) {
+        Project project = findProjectById(id);
+        if (project != null) {
             entityManager.remove(project);
         }
     }
-    
-    
-    
-    
-    
-    public void updateProject(Project project){
+
+    public void updateProject(Project project) {
         entityManager.merge(project);
     }
-    
-    
-    
-    
-    public List<Project> findAll(){
+
+    public List<Project> findAll() {
         return entityManager.createQuery("SELECT p FROM Project p", Project.class).getResultList();
     }
 

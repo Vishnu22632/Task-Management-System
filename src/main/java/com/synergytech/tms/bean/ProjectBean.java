@@ -6,12 +6,13 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 
-@ManagedBean(name = "projectBean")
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+@Named
 @ViewScoped
 public class ProjectBean implements Serializable {
 
@@ -37,18 +38,10 @@ public class ProjectBean implements Serializable {
         this.project = selectedProject;
     }
 
-    // update project
-//    public String updateUser() {
-//        Transaction trans
-//        Long accId;
-//        Account acc = acRepo.findById(accId);
-//
-//        userRepository.updateUser(user);
-//        return "user_list?faces-redirect=true";
-//    }
     public String updateProject() {
         projectRepository.updateProject(project);
-        return "projectList?faces-redirect=true";
+        projects = projectRepository.findAll(); // Refresh the project list
+        return null;
     }
 
     public List<Project> getProjects() {

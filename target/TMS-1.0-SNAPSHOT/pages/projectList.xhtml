@@ -80,7 +80,7 @@
 
                     <p:column headerText="Actions">
 
-                        
+
                         <p:commandButton icon="pi pi-pencil" styleClass="ui-button-info mr-2" 
                                          action="#{projectBean.prepareEditProject(project)}"
                                          oncomplete="PF('editProjectDialog').show()"
@@ -145,9 +145,13 @@
 
 
 
-                    <p:commandButton value="Save" action="#{userBean.updateUser}" 
+                    <p:commandButton value="Save" action="#{projectBean.updateProject()}" 
                                      oncomplete="PF('editProjectDialog').hide()" 
+                                     process="@form"
                                      update="projectListForm:projectTable"/>
+
+
+
 
 
                 </h:form>
