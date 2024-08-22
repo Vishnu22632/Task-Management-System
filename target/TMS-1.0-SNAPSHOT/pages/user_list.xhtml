@@ -116,9 +116,15 @@
 
 
 
-                    <p:commandButton value="Save" action="#{userBean.updateUser}" 
+<!--                    <p:commandButton value="Save" }" 
+                                     oncomplete="PF('editUserDialog').hide()" process="@this"
+                                     update=":userListForm:userTable"/>-->
+
+                    <p:commandButton value="Save" action="#{userBean.updateUser()}" 
                                      oncomplete="PF('editUserDialog').hide()" 
+                                     process="@form"
                                      update=":userListForm:userTable"/>
+
 
 
                 </h:form>

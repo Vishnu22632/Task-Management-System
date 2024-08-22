@@ -6,8 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 
+@Stateless
 public class UserRepository {
 
     @PersistenceContext(unitName = "tmsDS")

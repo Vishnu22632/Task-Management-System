@@ -3,16 +3,17 @@ package com.synergytech.tms.bean;
 import com.synergytech.tms.model.User;
 import com.synergytech.tms.repository.UserRepository;
 import java.io.IOException;
+import java.io.Serializable;
 
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 
 @Named
-@RequestScoped
-public class UserBean {
+@ViewScoped
+public class UserBean implements Serializable {
 
     @Inject
     private UserRepository userRepository;
@@ -37,7 +38,8 @@ public class UserBean {
 //        Account acc = acRepo.findById(accId);
 
         userRepository.updateUser(user);
-        return "user_list?faces-redirect=true";
+        users = userRepository.findAllUsers();  // Refresh the user list
+        return null;  // Keep on the same page after update
     }
 
     public String deleteUser(Long id) {
