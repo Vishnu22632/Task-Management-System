@@ -1,6 +1,9 @@
 /home/vishnu/NetBeansProjects/TaskManagementSystem/TMS/src/main/java/com/synergytech/tms/resources/JavaEE8Resource.java
 /home/vishnu/NetBeansProjects/TaskManagementSystem/TMS/src/main/java/com/synergytech/tms/bean/LoginBean.java
+/home/vishnu/NetBeansProjects/TaskManagementSystem/TMS/src/main/java/com/synergytech/tms/model/Project.java
 /home/vishnu/NetBeansProjects/TaskManagementSystem/TMS/src/main/java/com/synergytech/tms/JAXRSConfiguration.java
 /home/vishnu/NetBeansProjects/TaskManagementSystem/TMS/src/main/java/com/synergytech/tms/repository/UserRepository.java
+/home/vishnu/NetBeansProjects/TaskManagementSystem/TMS/src/main/java/com/synergytech/tms/bean/ProjectBean.java
 /home/vishnu/NetBeansProjects/TaskManagementSystem/TMS/src/main/java/com/synergytech/tms/bean/UserBean.java
+/home/vishnu/NetBeansProjects/TaskManagementSystem/TMS/src/main/java/com/synergytech/tms/repository/ProjectRepository.java
 /home/vishnu/NetBeansProjects/TaskManagementSystem/TMS/src/main/java/com/synergytech/tms/model/User.java
