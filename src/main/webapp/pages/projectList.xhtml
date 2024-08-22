@@ -17,7 +17,10 @@
             <h:form id="projectListForm">
                 <p:growl id="message" showDetail="true"/>
 
-                <p:dataTable value="#{projectBean.projects}" var="project" editable="true" id="projectTable">
+                <p:dataTable value="#{projectBean.projects}" var="project" editable="true" id="projectTable"
+
+                             paginator="true" rows="5" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15,20,">
 
                     <p:column headerText="#">
                         <p:cellEditor>

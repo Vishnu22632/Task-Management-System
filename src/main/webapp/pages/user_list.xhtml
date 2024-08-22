@@ -5,27 +5,27 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>User List</title>
+        <title>TMS - UserList</title>
     </h:head>
     <h:body>
 
         <ui:include src="menu.xhtml" />
-
-
 
         <p:card>
 
             <h:form id="userListForm">
                 <p:growl id="message" showDetail="true"/>
 
-                <p:dataTable value="#{userBean.users}" var="user" editable="true" id="userTable">
+                <p:dataTable value="#{userBean.users}" var="user" editable="true" id="userTable"
+                             paginator="true" rows="5" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15,20">
+
                     <p:column headerText="#">
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{user.id}" /></f:facet>
                             <f:facet name="input"><p:inputText value="#{user.id}" /></f:facet>
                         </p:cellEditor>
                     </p:column>
-
 
                     <p:column headerText="Full Name">
                         <p:cellEditor>
@@ -55,7 +55,6 @@
                         </p:cellEditor>
                     </p:column>
 
-
                     <p:column headerText="Address">
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{user.address}" /></f:facet>
@@ -70,25 +69,17 @@
                                          oncomplete="PF('editUserDialog').show()"
                                          update=":editForm" ajax="true" />
 
-
-
-
-                        <!--<p:commandButton value="Delete"  />-->
-
-                        <p:commandButton  icon="pi pi-trash" action="#{userBean.deleteUser(user.id)}"  styleClass="ui-button-danger mr-2" >
+                        <p:commandButton  icon="pi pi-trash"  action="#{userBean.deleteUser(user.id)}" style="margin-left:5px;"   styleClass="ui-button-danger " >
                             <p:confirm header="Confirmation" message="Do you want to delete this record?" icon="pi pi-info-circle"/>
                         </p:commandButton>
 
-
                     </p:column>
                 </p:dataTable>
-
 
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
                     <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
                     <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
                 </p:confirmDialog>
-
 
             </h:form>
 
@@ -114,18 +105,10 @@
 
                     </h:panelGrid>
 
-
-
-<!--                    <p:commandButton value="Save" }" 
-                                     oncomplete="PF('editUserDialog').hide()" process="@this"
-                                     update=":userListForm:userTable"/>-->
-
                     <p:commandButton value="Save" action="#{userBean.updateUser()}" 
                                      oncomplete="PF('editUserDialog').hide()" 
                                      process="@form"
                                      update=":userListForm:userTable"/>
-
-
 
                 </h:form>
             </p:dialog>
@@ -134,41 +117,3 @@
 
     </h:body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

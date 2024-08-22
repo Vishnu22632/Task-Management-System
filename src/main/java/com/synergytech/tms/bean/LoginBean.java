@@ -4,6 +4,7 @@ package com.synergytech.tms.bean;
 import com.synergytech.tms.model.User;
 import com.synergytech.tms.repository.UserRepository;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -36,6 +37,17 @@ public class LoginBean {
 
     public String login() {
         User user = userRepository.findUserByEmailAndPassword(email, password);
+        
+        // user SessionBean, set the username in sesssion bean
+        // Authentication successful, set the username in session bean
+        UserSessionBean sessionBean = FacesContext.getCurrentInstance()
+                                 .getApplication()
+                                 .evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{userSessionBean}", UserSessionBean.class);
+        sessionBean.setUsername(user.getFullName());
+        
+        
+        
+        
         if (user != null) {
             // Redirect to the welcome page or dashboard
             return "home.xhtml?faces-redirect=true";
