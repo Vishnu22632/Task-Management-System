@@ -42,5 +42,17 @@ public class ProjectRepository {
     public List<Project> findAll() {
         return entityManager.createQuery("SELECT p FROM Project p", Project.class).getResultList();
     }
+    
+    
+   
+    
+    
+    // Method to count total number of projects
+    public long countTotalProjects() {
+        return entityManager.createQuery("SELECT COUNT(p) FROM Project p", Long.class).getSingleResult();
+    }
+    
 
 }
+
+

@@ -12,7 +12,7 @@
             body{
                 padding: 0;
                 margin: 0;
-                
+
 
             }
             .container{
@@ -21,7 +21,7 @@
                 justify-content: center;
                 align-items: center;
             }
-            
+
 
             /*            .signup-panel{
                             display: flex;
@@ -44,73 +44,76 @@
 
     <h:body>
         <ui:include src="menu.xhtml"/>
-        
-        
-        
+
+
+
         <div class="container">
 
 
-        <p:card id="signup-card" style="width: 35rem; margin-top: 2em; " >
+            <p:card id="signup-card" style="width: 35rem; margin-top: 2em; " >
 
-            <f:facet name="header">
+                <f:facet name="header">
 
-            </f:facet>
-            <f:facet  name="title"  class="ui-g ui-fluid" >
-                <!--SignUp here !!!-->
-                <!--<img src="signuppic.jpg" width="150px;" height="200px;" alt="alt"/>-->
+                </f:facet>
+                <f:facet  name="title"  class="ui-g ui-fluid" >
+                    <!--SignUp here !!!-->
+                    <!--<img src="signuppic.jpg" width="150px;" height="200px;" alt="alt"/>-->
 
-                <img src="signuppic.jpg" width="100%"  />
-            </f:facet>
-            <!--  <f:facet name="subtitle">
-                            Card subtitle
-                        </f:facet>-->
+                    <img src="signuppic.jpg" width="100%"  />
+                </f:facet>
+                <!--  <f:facet name="subtitle">
+                                Card subtitle
+                            </f:facet>-->
 
-            <h:form class="signup-form">
-                <p:card class="container">
+                <h:form class="signup-form">
+                    <p:card class="container">
 
-                    <!--<p:panel header="User Registration">-->
-                    <p:messages id="messages" />
-                    <p:panelGrid columns="2">
-
-
-                        <p:outputLabel for="fullname" value="Full Name: " />
-                        <p:inputText id="fullname" value="#{userBean.user.fullName}" required="true" label="fullname"/>
-
-                        <p:outputLabel for="email" value="Email: "/>
-                        <p:inputText id="email" value="#{userBean.user.email}" required="true" label="Email"/>
-
-                        <p:outputLabel for="password" value="Password: "/>
-                        <p:password id="password" value="#{userBean.user.password}" required="true" label="Password"/>
-
-                        <p:outputLabel for="role" value="User Roles : "/>
-                        <p:inputText id="role" value="#{userBean.user.userRole}" placeholder="Admin,ProjectManager,Employee" required="true" label="Role"/>
-
-                        <p:outputLabel for="address" value="Address : "/>
-                        <p:inputText id="address" value="#{userBean.user.address}" required="true" label="Address"/>
+                        <!--<p:panel header="User Registration">-->
+                        <p:messages id="messages" />
+                        <p:panelGrid columns="2">
 
 
-                        <f:facet name="footer">
-                            <p:commandButton value="Save" action="#{userBean.createUser}" style="margin-right: 2px;" />
-                            <p:commandButton type="reset" value="Reset" styleClass="ui-button-danger ml-2" />
-                        </f:facet>
+                            <p:outputLabel for="fullname" value="Full Name: " />
+                            <p:inputText id="fullname" value="#{userBean.user.fullName}" required="true" label="fullname"/>
+
+                            <p:outputLabel for="email" value="Email: "/>
+                            <p:inputText id="email" value="#{userBean.user.email}" required="true" label="Email"/>
+
+                            <p:outputLabel for="password" value="Password: "/>
+                            <p:password id="password" value="#{userBean.user.password}" required="true" label="Password"/>
+
+                            <p:outputLabel for="role" value="User Roles : "/>
+                            <p:inputText id="role" value="#{userBean.user.userRole}" placeholder="Admin,ProjectManager,Employee" required="true" label="Role"/>
+
+                            <p:outputLabel for="address" value="Address : "/>
+                            <p:inputText id="address" value="#{userBean.user.address}" required="true" label="Address"/>
 
 
-                    </p:panelGrid>
+                            <f:facet name="footer">
+                                <p:commandButton value="Save" action="#{userBean.createUser}" style="margin-right: 2px;" />
+                                <p:commandButton type="reset" value="Reset" styleClass="ui-button-danger ml-2" />
+                            </f:facet>
 
 
-                </p:card>
-                
-                
-                 
-            </h:form>
+                        </p:panelGrid>
+
+
+                    </p:card>
 
 
 
-        </p:card>
+                </h:form>
 
-</div>
+
+
+            </p:card>
+
+        </div>
 
 
     </h:body>
 
 </html>
+
+
+

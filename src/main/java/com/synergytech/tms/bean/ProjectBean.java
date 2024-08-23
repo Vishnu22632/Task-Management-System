@@ -15,6 +15,8 @@ import javax.inject.Named;
 @Named
 @ViewScoped
 public class ProjectBean implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
 
     private Project project = new Project();
     private List<Project> projects;
@@ -30,6 +32,10 @@ public class ProjectBean implements Serializable {
 
         FacesContext.getCurrentInstance().getExternalContext().redirect("projectList.xhtml");
     }
+    
+    
+    
+    
 
 //    public void prepareEditUser(User selectedUser) {
 //        this.user = selectedUser;  // Populate the current user object with the selected user's data
@@ -63,5 +69,16 @@ public class ProjectBean implements Serializable {
     public void setProject(Project project) {
         this.project = project;
     }
+    
+    
+    
+    // Get total number of projects
+    public long totalProjects() {
+        return projectRepository.countTotalProjects();
+    }
+    
+    
 
 }
+
+
