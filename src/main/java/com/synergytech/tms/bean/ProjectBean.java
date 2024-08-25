@@ -15,7 +15,7 @@ import javax.inject.Named;
 @Named
 @ViewScoped
 public class ProjectBean implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
 
     private Project project = new Project();
@@ -24,29 +24,19 @@ public class ProjectBean implements Serializable {
     @Inject
     private ProjectRepository projectRepository;
 
-    public void saveProject() throws IOException {
-        projectRepository.save(project);
-
+     public void saveProject() throws IOException {
+        projectRepository.create(project);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Project Added Successfully!"));
-        // Redirect to the project list page
-
         FacesContext.getCurrentInstance().getExternalContext().redirect("projectList.xhtml");
     }
-    
-    
-    
-    
 
-//    public void prepareEditUser(User selectedUser) {
-//        this.user = selectedUser;  // Populate the current user object with the selected user's data
-//    }
     public void prepareEditProject(Project selectedProject) {
         this.project = selectedProject;
     }
 
     public String updateProject() {
-        projectRepository.updateProject(project);
-        projects = projectRepository.findAll(); // Refresh the project list
+        projectRepository.update(project);
+        projects = projectRepository.findAll();
         return null;
     }
 
@@ -58,7 +48,7 @@ public class ProjectBean implements Serializable {
     }
 
     public String deleteProject(Long id) {
-        projectRepository.deleteProject(id);
+        projectRepository.delete(id);
         return "projectList?faces-redirect=true";
     }
 
@@ -69,16 +59,8 @@ public class ProjectBean implements Serializable {
     public void setProject(Project project) {
         this.project = project;
     }
-    
-    
-    
-    // Get total number of projects
+
     public long totalProjects() {
         return projectRepository.countTotalProjects();
     }
-    
-    
-
 }
-
-

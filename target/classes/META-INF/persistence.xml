@@ -8,7 +8,7 @@
         <class>com.synergytech.tms.model.User</class>
         <jta-data-source>java:/jboss/datasources/tmsDS</jta-data-source>
         <properties>
-            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.show_sql" value="false" />
             <property name="hibernate.format_sql" value="true" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.jdbc.batch_size" value="20" />

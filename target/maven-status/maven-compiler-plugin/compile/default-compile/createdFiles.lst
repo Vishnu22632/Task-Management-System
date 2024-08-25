@@ -1,3 +1,4 @@
+com/synergytech/tms/utils/PasswordUtil.class
 com/synergytech/tms/model/Project.class
 com/synergytech/tms/model/User.class
 com/synergytech/tms/repository/UserRepository.class
@@ -6,6 +7,7 @@ com/synergytech/tms/bean/LoginBean.class
 com/synergytech/tms/resources/JavaEE8Resource.class
 com/synergytech/tms/bean/UserSessionBean.class
 com/synergytech/tms/bean/UserBean.class
+com/synergytech/tms/repository/BaseRepository.class
 com/synergytech/tms/bean/ProjectBean.class
 com/synergytech/tms/bean/LogoutBean.class
 com/synergytech/tms/repository/ProjectRepository.class

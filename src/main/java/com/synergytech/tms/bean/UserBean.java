@@ -2,14 +2,14 @@ package com.synergytech.tms.bean;
 
 import com.synergytech.tms.model.User;
 import com.synergytech.tms.repository.UserRepository;
+import com.synergytech.tms.utils.PasswordUtil;
 import java.io.IOException;
 import java.io.Serializable;
-
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 @Named
 @ViewScoped
@@ -22,34 +22,33 @@ public class UserBean implements Serializable {
     private List<User> users;
 
     public String createUser() {
-        userRepository.createUser(user);
-        // Reset the form
+        // Hash the password before saving the user
+        String hashedPassword = PasswordUtil.hashPassword(user.getPassword());
+        user.setPassword(hashedPassword);
+
+        userRepository.create(user);
         user = new User();
         return "user_list?faces-redirect=true";
     }
 
     public void prepareEditUser(User selectedUser) {
-        this.user = selectedUser;  // Populate the current user object with the selected user's data
+        this.user = selectedUser;
     }
 
     public String updateUser() {
-//        Transaction trans
-//        Long accId;
-//        Account acc = acRepo.findById(accId);
-
-        userRepository.updateUser(user);
-        users = userRepository.findAllUsers();  // Refresh the user list
-        return null;  // Keep on the same page after update
+        userRepository.update(user);
+        users = userRepository.findAll();
+        return null;
     }
 
     public String deleteUser(Long id) {
-        userRepository.deleteUser(id);
+        userRepository.delete(id);
         return "user_list?faces-redirect=true";
     }
 
     public List<User> getUsers() {
         if (users == null) {
-            users = userRepository.findAllUsers();
+            users = userRepository.findAll();
         }
         return users;
     }

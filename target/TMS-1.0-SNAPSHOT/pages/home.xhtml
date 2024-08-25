@@ -96,9 +96,10 @@
                                 </p:selectOneMenu>
 
                                 <h:outputLabel for="startDate" value="Start Date:" />
-                                <p:calendar size="30" id="startDate" value="#{projectBean.project.startDate}" pattern="MM/dd/yyyy" />
+                                <p:calendar size="30" id="startDate" autocomplete="off" value="#{projectBean.project.startDate}" pattern="MM/dd/yyyy" />
                                 <h:outputLabel for="endDate" value="End Date:" />
-                                <p:calendar size="30" id="endDate" value="#{projectBean.project.endDate}" pattern="MM/dd/yyyy" />
+                                <p:calendar size="30" id="endDate" autocomplete="off" value="#{projectBean.project.endDate}" pattern="MM/dd/yyyy" />
+                                
                                 <h:outputLabel for="manager" value="Project Manager:" />
                                 <p:inputText size="30" id="manager" value="#{projectBean.project.manager}" required="true" />
 
@@ -139,8 +140,8 @@
 
                             <p:dataTable value="#{projectBean.projects}" var="project"  id="projectTable"
 
-                                         paginator="true" rows="7" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                         rowsPerPageTemplate="10,15,20," paginatorPosition="bottom">
+                                         paginator="true" rows="5" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="5,10,15," paginatorPosition="bottom">
 
                                 <p:column headerText="#">
                                     <p:cellEditor>

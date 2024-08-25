@@ -43,6 +43,7 @@ public class LoginBean {
         UserSessionBean sessionBean = FacesContext.getCurrentInstance()
                                  .getApplication()
                                  .evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{userSessionBean}", UserSessionBean.class);
+        
         sessionBean.setUsername(user.getFullName());
         
         

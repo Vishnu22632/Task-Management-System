@@ -83,6 +83,7 @@
                 <p:commandButton icon="pi pi-check" value="LogIn" action="#{loginBean.login}" 
                                  update=":loginForm:messageDialogContent"
                                  oncomplete="if(!args.validationFailed) PF('messageDialog').show()" />
+                
                 <p:commandButton icon="pi pi-times" type="reset" value="Reset" styleClass="ui-button-secondary" style="margin-left: .5em"/>
             </h:form>
         </p:card>

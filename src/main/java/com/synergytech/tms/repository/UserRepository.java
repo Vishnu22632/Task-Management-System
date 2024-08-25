@@ -1,60 +1,32 @@
 package com.synergytech.tms.repository;
 
 import com.synergytech.tms.model.User;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
-import java.util.List;
+import com.synergytech.tms.utils.PasswordUtil;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 
 @Stateless
-public class UserRepository {
+public class UserRepository extends BaseRepository<User, Long> {
 
-    @PersistenceContext(unitName = "tmsDS")
-    private EntityManager entityManager;
-
-    @Transactional
-    public void createUser(User user) {
-        entityManager.persist(user);
+    public UserRepository() {
+        super(User.class);
     }
 
-    public User findUserById(Long id) {
-        return entityManager.find(User.class, id);
-    }
-
-    @Transactional
-    public void updateUser(User user) {
-        entityManager.merge(user);
-    }
-
-    @Transactional
-    public void deleteUser(Long id) {
-        User user = findUserById(id);
-        if (user != null) {
-            entityManager.remove(user);
-        }
-    }
-
-    public List<User> findAllUsers() {
-        return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
-    }
-    
-  
-    // find user by email and password
     public User findUserByEmailAndPassword(String email, String password) {
         try {
-            return entityManager.createQuery(
-                    "SELECT u FROM User u WHERE u.email = :email AND u.password = :password", User.class)
-                .setParameter("email", email)
-                .setParameter("password", password)
-                .getSingleResult();
+            User user = entityManager.createQuery(
+                    "SELECT u FROM User u WHERE u.email = :email", User.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+
+            // Compare the provided password with the stored hashed password
+            if (user != null && PasswordUtil.checkPassword(password, user.getPassword())) {
+                return user;
+            } else {
+                return null;
+            }
         } catch (NoResultException e) {
             return null;
         }
     }
-    
-    
 }
-
