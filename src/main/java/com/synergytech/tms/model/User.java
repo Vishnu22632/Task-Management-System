@@ -1,16 +1,14 @@
 package com.synergytech.tms.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable {
+public class User extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
     @Column(nullable = false)
     private String fullName;
 
@@ -19,23 +17,18 @@ public class User implements Serializable {
 
     @Column(nullable = false)
     private String password;
-    
+
     @Column(nullable = false)
     private String userRole;
-    
+
     @Column(nullable = false)
     private String address;
 
+//    @ManyToMany(mappedBy = "teamMembers", fetch = FetchType.LAZY)
+//    private Set<Project> projects;
+//    @OneToMany(mappedBy = "manager", fetch = FetchType.LAZY)
+//    private Set<Project> menagedProjects;
     // Getters and Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getFullName() {
         return fullName;
     }
@@ -76,41 +69,4 @@ public class User implements Serializable {
         this.address = address;
     }
 
-    @Override
-    public String toString() {
-        return "User{" + "id=" + id + ", fullName=" + fullName + ", email=" + email + ", password=" + password + ", userRole=" + userRole + ", address=" + address + '}';
-    }
-
-    
-    
-    
-    
 }
-
-
-
-//<datasource jta="true" jndi-name="java:/jboss/datasources/tmsDS" pool-name="tmsDS" enabled="true" use-ccm="true">
-//                    <connection-url>jdbc:mysql://localhost:3306/tmsdb</connection-url>
-//                    <driver-class>com.mysql.cj.jdbc.Driver</driver-class>
-//                    <driver>mysql</driver>
-//                    <security>
-//                        <user-name>vishnu</user-name>
-//                        <password>mahi07</password>
-//                    </security>
-//                    <validation>
-//                        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker"/>
-//                        <background-validation>true</background-validation>
-//                        <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter"/>
-//                    </validation>
-//                </datasource>
-
-
-
-
-
-
-
-
-
-
-

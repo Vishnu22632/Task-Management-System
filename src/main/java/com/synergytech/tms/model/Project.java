@@ -3,18 +3,11 @@ package com.synergytech.tms.model;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="project")
-public class Project {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Table(name = "projects")
+public class Project extends BaseEntity {
 
     @Column(nullable = false)
     private String name;
@@ -24,17 +17,11 @@ public class Project {
     private String manager;
     private String teamMembers;
     private String description;
-    
-    
-    // getter and setter
 
-    public Long getId() {
-        return id;
-    }
+//    @OneToMany(mappedBy = "project")
+//    private List<Task> tasks; // one-to-manay relationship
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+// getter and setter
 
     public String getName() {
         return name;
@@ -92,11 +79,11 @@ public class Project {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return "Project{" + "id=" + id + ", name=" + name + ", status=" + status + ", startDate=" + startDate + ", endDate=" + endDate + ", manager=" + manager + ", teamMembers=" + teamMembers + ", description=" + description + '}';
-    }
     
     
-
+    
+    
+    
+    
+    
 }
