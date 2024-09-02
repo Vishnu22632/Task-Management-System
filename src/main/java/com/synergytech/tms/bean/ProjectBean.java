@@ -1,8 +1,9 @@
 package com.synergytech.tms.bean;
 
 import com.synergytech.tms.model.Project;
+import com.synergytech.tms.model.Task;
 import com.synergytech.tms.repository.ProjectRepository;
-import java.io.IOException;
+import com.synergytech.tms.repository.TaskRepository;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -21,18 +22,19 @@ public class ProjectBean implements Serializable {
     private Project project = new Project();
     private List<Project> projects;
 
+    private List<Task> tasks; // Add a list of tasks
+
     @Inject
     private ProjectRepository projectRepository;
+
+    @Inject
+    private TaskRepository taskRepository; // inject TaskRepository
 
     // Method to prepare a new project
     public void prepareNewProject() {
         this.project = new Project();
     }
-    
-    
-    
-    
-    
+
     private boolean editing = false;
 
     public boolean isEditing() {
@@ -42,84 +44,31 @@ public class ProjectBean implements Serializable {
     public void setEditing(boolean editing) {
         this.editing = editing;
     }
-    
-    
-    
-/*
-    public String saveOrUpdateUser(){
-        //Hash the password before saving the user
-        String hashedPassword=PasswordUtil.hashPassword(user.getPassword());
-        user.setPassword(hashedPassword);
-        
-        
-        if(user.getId()==null){
-            userRepository.create(user);
-            addMessage("Success", "User created successfully !!!");
-            
-        }else{
-            userRepository.update(user);
-            addMessage("Success", "User updated successfully !!!");
-        }
-        
-        users=userRepository.findAll();
-        user=new User();
-        setEditing(false);
-        return null; // stay on the same page
-    }
-    
- */
-    
-    
-    
-    public String saveOrUpdateProject(){
-        
-        if(project.getId()==null){
+
+    public String saveOrUpdateProject() {
+
+        if (project.getId() == null) {
             projectRepository.create(project);
             addMessage("Success", "Project created successfully !!!");
-        }else{
+        } else {
             projectRepository.update(project);
             addMessage("Success", "Project Updated successfully !!!");
         }
-        
+
         projectRepository.findAll();
-        project =new Project();
+        project = new Project();
         setEditing(false);
         return null;
-        
-    }
-    
-    /*
 
-    // Method to handle both add and update
-    public void saveProject() throws IOException {
-        FacesMessage message;
-
-        if (project.getId() == null) {
-            // New project, create it
-            projectRepository.create(project);
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Project Added Successfully!");
-
-        } else {
-            // Existing project, update it
-            projectRepository.update(project);
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Project Updated Successfully!");
-        }
-
-        FacesContext.getCurrentInstance().addMessage(null, message);
-
-        FacesContext.getCurrentInstance().getExternalContext().redirect("projectList.xhtml");
     }
 
-    public String updateProject() {
-        projectRepository.update(project);
-        projects = projectRepository.findAll();
-        return null;
+    public List<Task> getTasksByProject(Project project) {
+        return taskRepository.findByProject(project.getId());
     }
-
-*/
 
     public void prepareEditProject(Project selectedProject) {
         this.project = selectedProject;
+
         setEditing(true);
     }
 
@@ -147,19 +96,19 @@ public class ProjectBean implements Serializable {
     public long totalProjects() {
         return projectRepository.countTotalProjects();
     }
-    
-    
-     // Add a method to add messages
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    // Add a method to add messages
     private void addMessage(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
-    
-    
-    
-    
-    
+
 }
-
-
-
