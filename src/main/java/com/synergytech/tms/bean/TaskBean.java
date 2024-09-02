@@ -61,6 +61,7 @@ public class TaskBean implements Serializable {
         return List.of(Task.TaskStatus.values());
     }
     
+    /*
     
     // Save task
    public String saveTask() {
@@ -92,16 +93,55 @@ public class TaskBean implements Serializable {
     }
 }
 
+*/
+    
+     // Unified save or update task method
+    public String saveOrUpdateTask() {
+        try {
+            if (task.getProject() == null || task.getProject().getId() == null) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Project is required"));
+                return null;
+            }
+
+            if (task.getId() == null) {
+                taskRepository.create(task);
+                addMessage("Success", "Task created successfully !!!");
+            } else {
+                taskRepository.update(task);
+                addMessage("Success", "Task Updated successfully !!!");
+            }
+
+            tasks = taskRepository.findAll(); // Refresh the task list
+            return "taskList.xhtml?faces-redirect=true"; // Redirect to taskList.xhtml
+
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage()));
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+
     public String deleteTask(Long id) {
         taskRepository.delete(id);
-        return "projectView.xhtml?faces-redirect=true";
+        
+        return "listTask?faces-redirect=true";
     }
 
-    public String updateTask() {
-        taskRepository.update(task);
-        tasks = taskRepository.findAll();
-        return null;
+//    public String updateTask() {
+//        taskRepository.update(task);
+//        tasks = taskRepository.findAll();
+//        return null;
+//    }
+    
+    
+    
+     // Add a method to add messages
+    private void addMessage(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
+    
 
     public void prepareEditTask(Task selectedTask) {
         this.task = selectedTask;

@@ -9,6 +9,7 @@
 /home/vishnu/NetBeansProjects/TaskManagementSystem/Task-Management-System/src/main/java/com/synergytech/tms/repository/UserRepository.java
 /home/vishnu/NetBeansProjects/TaskManagementSystem/Task-Management-System/src/main/java/com/synergytech/tms/bean/ProjectBean.java
 /home/vishnu/NetBeansProjects/TaskManagementSystem/Task-Management-System/src/main/java/com/synergytech/tms/model/Project.java
+/home/vishnu/NetBeansProjects/TaskManagementSystem/Task-Management-System/src/main/java/com/synergytech/tms/model/UserRole.java
 /home/vishnu/NetBeansProjects/TaskManagementSystem/Task-Management-System/src/main/java/com/synergytech/tms/bean/TaskBean.java
 /home/vishnu/NetBeansProjects/TaskManagementSystem/Task-Management-System/src/main/java/com/synergytech/tms/model/User.java
 /home/vishnu/NetBeansProjects/TaskManagementSystem/Task-Management-System/src/main/java/com/synergytech/tms/repository/BaseRepository.java

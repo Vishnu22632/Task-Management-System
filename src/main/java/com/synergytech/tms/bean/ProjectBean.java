@@ -31,6 +31,8 @@ public class ProjectBean implements Serializable {
     
     
     
+    
+    
     private boolean editing = false;
 
     public boolean isEditing() {
@@ -158,3 +160,6 @@ public class ProjectBean implements Serializable {
     
     
 }
+
+
+

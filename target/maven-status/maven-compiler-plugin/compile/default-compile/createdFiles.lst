@@ -3,6 +3,7 @@ com/synergytech/tms/converter/ProjectConverter.class
 com/synergytech/tms/bean/ConcreteProjectLazyDataModel.class
 com/synergytech/tms/bean/LoginBean.class
 com/synergytech/tms/bean/UserSessionBean.class
+com/synergytech/tms/model/UserRole.class
 com/synergytech/tms/bean/ProjectBean.class
 com/synergytech/tms/bean/TaskBean.class
 com/synergytech/tms/bean/LogoutBean.class

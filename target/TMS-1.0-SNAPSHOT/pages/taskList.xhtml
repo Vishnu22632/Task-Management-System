@@ -6,189 +6,144 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>TMS -- AllTasks</title>
+        <title>TMS - AllProjects</title>
     </h:head>
     <h:body>
-
         <ui:include src="menu.xhtml" />
-
 
         <div class="main-container" style="display: flex; width: 100%;">
 
             <ui:include src="panelmenu.xhtml" />
 
-
-
-
             <p:card style="width: 80%;">
 
-                <!--                <h:panelGroup style="display: flex; justify-content: flex-end; margin-bottom: 4px;">
-                                    <p:button value="Add New Task" icon="pi pi-fw pi-plus" outcome="taskForm.xhtml"  />
-                                </h:panelGroup>-->
-
-
+                <h:form id="projectActionsForm">
+                    <h:panelGroup style="display: flex; justify-content: flex-end; margin-bottom: 4px;">
+                        <p:commandButton value="Add New Task" icon="pi pi-fw pi-plus"
+                                         oncomplete="PF('editProjectDialog').show()"
+                                         update=":editForm"
+                                         actionListener="#{projectBean.prepareNewProject()}"/>
+                    </h:panelGroup>
+                </h:form>
 
                 <h:form id="projectListForm">
-                    <!--<p:growl id="msgs" showDetail="true" life="3000" />-->
+                    <p:growl id="grl" showDetail="true" sticky="false" life="2000" />
 
-                    <p:dataTable value="#{projectBean.projects}" var="project" editable="true" id="projectTable"
-
+                    <p:dataTable value="#{taskBean.tasks}" var="task" editable="true" id="projectTable"
                                  paginator="true" rows="5" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  rowsPerPageTemplate="5,10,15,20," paginatorPosition="bottom">
 
-
-                        <f:facet name="header">
-                            TASK LIST
-
-                            <!-- Add Task button -->
-                            <p:commandButton icon="pi pi-fw pi-plus"
-                                             value="Add New Task"
-                                             style="color: white; background-color: #007bff; margin: 4px; margin-left: 82%"
-                                             action="taskForm.xhtml?faces-redirect=true"
-                                             />
-
-                            <!--                            oncomplete="PF('editTaskDialog').show()"
-                                                                         update="" 
-                                                                         ajax="true"-->
-                        </f:facet>
-
-                        <p:column headerText="ID">
-                            <h:outputText value="#{project.id}" />
+                        <p:column headerText="#">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{task.id}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{task.id}" /></f:facet>
+                            </p:cellEditor>
                         </p:column>
 
-
-                        <p:column headerText="PROJECT NAME">
-                            <h:outputText value="#{project.name}" />
+                        <p:column headerText="TASK NAME">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{task.taskName}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{task.taskName}" /></f:facet>
+                            </p:cellEditor>
                         </p:column>
 
-                        <p:column headerText="Task NAME">
-                            <h:outputText value="" />
+                        <p:column headerText="Task Desc">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{task.description}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{task.description}" /></f:facet>
+                            </p:cellEditor>
                         </p:column>
 
+                       
 
-
-                        <p:column headerText="START DATE">
-                            <h:outputText value="#{project.startDate}" />
-                        </p:column>
-
-
-                        <p:column headerText="DUE DATE">
-                            <h:outputText value="#{project.endDate}" />
-                        </p:column>
-
+                        
 
                         <p:column headerText="TASK STATUS">
-                            <h:outputText value="#{taskBean.task.taskStatus}" />
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{task.taskStatus}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{task.taskStatus}" /></f:facet>
+                            </p:cellEditor>
                         </p:column>
 
+                        
 
                         <p:column headerText="Actions">
-
-                            <!--edit button-->
-
                             <p:commandButton icon="pi pi-pencil" styleClass="ui-button-info mr-2" 
-                                             oncomplete="PF('editTaskDialog').show()"
-                                             update=":transactionForm" ajax="true" />
+                                             action="#{taskBean.prepareEditTask(task)}"
+                                             oncomplete="PF('editProjectDialog').show()"
+                                             update=":editForm" ajax="true" />
 
-
-
-
-                            <p:commandButton icon="pi pi-trash"
-
-                                             update="" 
-                                             styleClass="ui-button-danger mr-2">
-                                <p:confirm header="Confirmation" 
-                                           message="Are you sure you want to delete this Task?" 
-                                           icon="pi pi-exclamation-triangle"/>
+                            <p:commandButton  icon="pi pi-trash" 
+                                              action="#{taskBean.deleteTask(task.id)}" 
+                                              update="projectListForm:projectTable,:projectListForm:grl"
+                                              style="margin:0 3px;" styleClass="ui-button-danger mr-2">
+                                <p:confirm header="Confirmation" message="Do you want to delete this record?" icon="pi pi-info-circle"/>
                             </p:commandButton>
 
-
-
-
+<!--                            <p:commandButton icon="pi pi-eye" action="projectView.xhtml?faces-redirect=true" style="background-color: #007bff; color: white;" class="mr-2">
+                                <p:confirm header="Confirmation" message="Do you want to View this project?" icon="pi pi-info-circle"/>
+                            </p:commandButton>-->
                         </p:column>
                     </p:dataTable>
-
 
                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
                         <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
                         <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
                     </p:confirmDialog>
-
-
                 </h:form>
 
+                <!-- Edit Project Dialog -->
+                <p:dialog header="Add Or Edit Task" widgetVar="editProjectDialog" modal="true" resizable="false" width="500" style="text-align: center;">
+                    <h:form id="editForm">
+                        <h:panelGrid columns="2" cellpadding="5">
 
 
-                <p:dialog widgetVar="editTaskDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" header="Add Task Or Edit Task" style="text-align: center;" width="600" height="300">
-                    <h:form id="transactionForm" >
-
-                        <p:panel id="dialogHeader"  
-                                 styleClass="dialog-panel-header">        
-
-                            <h:panelGrid id="editPanel" columns="2" cellspacing="10" >
-
-                                <h:outputLabel for="project" value="Project : " style="font-weight: bolder;" />
-                                <p:selectOneMenu id="project" value="#{taskBean.task.project}" required="true" 
-                                                 styleClass="input-field"
-                                                 converter="projectConverter" style="width: 320px;">
-                                    <f:selectItem itemLabel="Select Project" itemValue="#{null}" noSelectionOption="true" />
-                                    <f:selectItems value="#{taskBean.projects}" var="project" itemLabel="#{project.name}" itemValue="#{project}" />
-                                    <p:ajax event="change" update="@this"  />
-                                </p:selectOneMenu>
+                            <h:outputLabel for="task" value="Project : " style="font-weight: bolder;" />
+                            <p:selectOneMenu id="task" value="#{taskBean.task.project}" required="true" 
+                                             styleClass="input-field"
+                                             converter="projectConverter" style="width: 320px;">
+                                <f:selectItem itemLabel="Select Project" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItems value="#{taskBean.projects}" var="project" itemLabel="#{project.name}" itemValue="#{project}" />
+                                <p:ajax event="change" update="@this"  />
+                            </p:selectOneMenu>
 
 
 
-                                <h:outputLabel  for="tname" value="Task Name : " style="font-weight: bolder" />
-                                <p:inputText id="tname" value="#{taskBean.task.taskName}" size="30" required="true" styleClass="input-field"/>
+                            <h:outputLabel  for="tname" value="Task Name : " style="font-weight: bolder" />
+                            <p:inputText id="tname" value="#{taskBean.task.taskName}" size="30" required="true" styleClass="input-field"/>
 
 
 
 
-                                <h:outputLabel for="tdescription" value="Description : " style="font-weight: bolder" />
-                                <p:inputTextarea id="tdescription" rows="3" cols="32" value="#{taskBean.task.description}" />
+                            <h:outputLabel for="tdescription" value="Description : " style="font-weight: bolder" />
+                            <p:inputTextarea id="tdescription" rows="3" cols="32" value="#{taskBean.task.description}" />
 
 
 
 
 
-                                <h:outputLabel for="tstatus" value="Status : " style="font-weight: bolder" />
-                                <p:selectOneMenu id="status" value="#{taskBean.task.taskStatus}" style="width: 320px;" >
-                                    <f:selectItem itemLabel="Select Status" itemValue="" />
-                                    <f:selectItems value="#{taskBean.taskStatusValues}" 
-                                                   var="status" itemLabel="#{status}" itemValue="#{status}" />
-                                </p:selectOneMenu>
+                            <h:outputLabel for="tstatus" value="Status : " style="font-weight: bolder" />
+                            <p:selectOneMenu id="status" value="#{taskBean.task.taskStatus}" style="width: 320px;" >
+                                <f:selectItem itemLabel="Select Status" itemValue="" />
+                                <f:selectItems value="#{taskBean.taskStatusValues}" 
+                                               var="status" itemLabel="#{status}" itemValue="#{status}" />
+                            </p:selectOneMenu>
 
 
 
 
-                            </h:panelGrid>
 
-                            <div class="dialog-footer">
-                                <p:commandButton value="Save" 
-                                                 actionListener="#{taskBean.saveTask()}"
-                                                 update=":projectListForm:projectTable :projectListForm:msgs " 
-                                                 oncomplete="if (args.validationFailed) { PF('editTransactionDialog').show(); } else { PF('editTransactionDialog').hide(); }" />
+                        </h:panelGrid>
 
-                            </div>
-                        </p:panel>
+                        <p:commandButton value="#{projectBean.editing ? 'Update' : 'Create Task'}" 
+                                         action="#{taskBean.saveOrUpdateTask()}" 
+                                         oncomplete="PF('editProjectDialog').hide()" 
+                                         process="@form"
+                                         update=":projectListForm:projectTable , :projectListForm:grl" />
                     </h:form>
                 </p:dialog>
 
-
-
-
-
-
-
-
-
             </p:card>
-
-
-
         </div>
-
-
-
     </h:body>
 </html>
