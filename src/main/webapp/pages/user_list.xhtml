@@ -127,10 +127,17 @@
                             <p:inputText id="email" size="30" value="#{userBean.user.email}" />
 
                             <h:outputLabel for="password" value="Password" />
-                            <p:inputText id="password" size="30" value="#{userBean.user.password}" />
+                            <p:password id="password" size="30" value="#{userBean.user.password}" />
 
-                            <h:outputLabel for="userRole" value="User Role" />
-                            <p:inputText id="userRole" size="30" value="#{userBean.user.userRole}" />
+                            
+
+                            <h:outputLabel for="userRole" value="User Roles :  " />
+                            <p:selectOneMenu id="userRole" value="#{userBean.user.userRole}" style="width: 318px;">
+                                <f:selectItem itemLabel="Select Role" itemValue="" />
+                                <f:selectItems value="#{userBean.userRoles}" var="userRole"
+                                               itemLabel="#{userRole}" itemValue="#{userRole}" />
+                            </p:selectOneMenu>
+
 
                             <h:outputLabel for="address" value="Address" />
                             <p:inputText id="address" size="30" value="#{userBean.user.address}" />

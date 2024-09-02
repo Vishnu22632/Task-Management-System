@@ -28,6 +28,65 @@ public class ProjectBean implements Serializable {
     public void prepareNewProject() {
         this.project = new Project();
     }
+    
+    
+    
+    private boolean editing = false;
+
+    public boolean isEditing() {
+        return editing;
+    }
+
+    public void setEditing(boolean editing) {
+        this.editing = editing;
+    }
+    
+    
+    
+/*
+    public String saveOrUpdateUser(){
+        //Hash the password before saving the user
+        String hashedPassword=PasswordUtil.hashPassword(user.getPassword());
+        user.setPassword(hashedPassword);
+        
+        
+        if(user.getId()==null){
+            userRepository.create(user);
+            addMessage("Success", "User created successfully !!!");
+            
+        }else{
+            userRepository.update(user);
+            addMessage("Success", "User updated successfully !!!");
+        }
+        
+        users=userRepository.findAll();
+        user=new User();
+        setEditing(false);
+        return null; // stay on the same page
+    }
+    
+ */
+    
+    
+    
+    public String saveOrUpdateProject(){
+        
+        if(project.getId()==null){
+            projectRepository.create(project);
+            addMessage("Success", "Project created successfully !!!");
+        }else{
+            projectRepository.update(project);
+            addMessage("Success", "Project Updated successfully !!!");
+        }
+        
+        projectRepository.findAll();
+        project =new Project();
+        setEditing(false);
+        return null;
+        
+    }
+    
+    /*
 
     // Method to handle both add and update
     public void saveProject() throws IOException {
@@ -43,25 +102,23 @@ public class ProjectBean implements Serializable {
             projectRepository.update(project);
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Project Updated Successfully!");
         }
-        
-        FacesContext.getCurrentInstance().addMessage(null, message);
-        
-        FacesContext.getCurrentInstance().getExternalContext().redirect("projectList.xhtml");
-    }
 
-//     public void saveProject() throws IOException {
-//        projectRepository.create(project);
-//        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Project Added Successfully!"));
-//        FacesContext.getCurrentInstance().getExternalContext().redirect("projectList.xhtml");
-//    }
-    public void prepareEditProject(Project selectedProject) {
-        this.project = selectedProject;
+        FacesContext.getCurrentInstance().addMessage(null, message);
+
+        FacesContext.getCurrentInstance().getExternalContext().redirect("projectList.xhtml");
     }
 
     public String updateProject() {
         projectRepository.update(project);
         projects = projectRepository.findAll();
         return null;
+    }
+
+*/
+
+    public void prepareEditProject(Project selectedProject) {
+        this.project = selectedProject;
+        setEditing(true);
     }
 
     public List<Project> getProjects() {
@@ -73,6 +130,7 @@ public class ProjectBean implements Serializable {
 
     public String deleteProject(Long id) {
         projectRepository.delete(id);
+        addMessage("Success", "Project deleted successfully !!!");
         return "projectList?faces-redirect=true";
     }
 
@@ -87,4 +145,16 @@ public class ProjectBean implements Serializable {
     public long totalProjects() {
         return projectRepository.countTotalProjects();
     }
+    
+    
+     // Add a method to add messages
+    private void addMessage(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+    
+    
+    
+    
+    
 }

@@ -1,6 +1,7 @@
 package com.synergytech.tms.bean;
 
 import com.synergytech.tms.model.User;
+import com.synergytech.tms.model.UserRole;
 import com.synergytech.tms.repository.UserRepository;
 import com.synergytech.tms.utils.PasswordUtil;
 import java.io.IOException;
@@ -24,14 +25,9 @@ public class UserBean implements Serializable {
     
     private boolean editing = false;
 
-    public boolean isEditing() {
-        return editing;
-    }
-
-    public void setEditing(boolean editing) {
-        this.editing = editing;
-    }
+   
     
+    // save or update user
     
     public String saveOrUpdateUser(){
         //Hash the password before saving the user
@@ -57,47 +53,33 @@ public class UserBean implements Serializable {
     
     
 
-//    public String createUser() {
-//        // Hash the password before saving the user
-//        String hashedPassword = PasswordUtil.hashPassword(user.getPassword());
-//        user.setPassword(hashedPassword);
-//
-//        userRepository.create(user);
-//        
-//        // add message to the userList page
-//        addMessage("Success", "User Created successfully!!!");
-//        
-//        
-//        
-//        
-//        user = new User();
-//        return "user_list?faces-redirect=true";
-//    }
+
 
     public void prepareEditUser(User selectedUser) {
         this.user = selectedUser;
         setEditing(true); // Set editing mode
     }
 
-//    public String updateUser() {
-//        
-//        // Hash the password before saving the user
-//        String hashedPassword = PasswordUtil.hashPassword(user.getPassword());
-//        user.setPassword(hashedPassword);
-//
-//        userRepository.update(user);
-//        users = userRepository.findAll();
-//        
-//        addMessage("Success", "User updated successfully!!!");
-//        
-//        return null;
-//    }
 
+
+    // delete user
+    
     public String deleteUser(Long id) {
         userRepository.delete(id);
         addMessage("success", "User deleted Successfully !!!");
         // Refresh the page by redirecting to the same page
         return "user_list?faces-redirect=true";
+    }
+    
+    
+    
+    // getter and setter
+     public boolean isEditing() {
+        return editing;
+    }
+
+    public void setEditing(boolean editing) {
+        this.editing = editing;
     }
 
     public List<User> getUsers() {
@@ -114,6 +96,14 @@ public class UserBean implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+    
+    // get user roles from enum
+    public UserRole[] getUserRoles(){
+        return UserRole.values();
+    }
+    
+    
+    
     
     
     // Add a method to add messages

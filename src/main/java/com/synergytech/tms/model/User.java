@@ -18,9 +18,11 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String userRole;
-
+    private UserRole userRole;
+    
+    
     @Column(nullable = false)
     private String address;
 
@@ -53,13 +55,15 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
-    public String getUserRole() {
+    public UserRole getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(String userRole) {
+    public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
     }
+
+   
 
     public String getAddress() {
         return address;
