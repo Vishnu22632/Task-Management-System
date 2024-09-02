@@ -22,6 +22,15 @@ public class UserBean implements Serializable {
     private User user = new User();
     private List<User> users;
     
+    private boolean editing = false;
+
+    public boolean isEditing() {
+        return editing;
+    }
+
+    public void setEditing(boolean editing) {
+        this.editing = editing;
+    }
     
     
     public String saveOrUpdateUser(){
@@ -41,6 +50,7 @@ public class UserBean implements Serializable {
         
         users=userRepository.findAll();
         user=new User();
+        setEditing(false);
         return null; // stay on the same page
     }
     
@@ -66,6 +76,7 @@ public class UserBean implements Serializable {
 
     public void prepareEditUser(User selectedUser) {
         this.user = selectedUser;
+        setEditing(true); // Set editing mode
     }
 
 //    public String updateUser() {

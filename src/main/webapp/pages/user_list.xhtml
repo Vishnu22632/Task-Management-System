@@ -137,7 +137,8 @@
 
                         </h:panelGrid>
 
-                        <p:commandButton value="Save" action="#{userBean.saveOrUpdateUser()}" 
+                        <p:commandButton value="#{userBean.editing ? 'Update' : 'Create User'}" 
+                                         action="#{userBean.saveOrUpdateUser()}" 
                                          oncomplete="PF('editUserDialog').hide()" 
                                          process="@form"
                                          update=":userListForm:userTable, :userListForm:grl"/>
