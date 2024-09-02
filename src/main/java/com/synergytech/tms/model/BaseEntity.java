@@ -15,6 +15,7 @@ public abstract class BaseEntity implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Long id;
 
     public Long getId() {
@@ -63,3 +64,4 @@ public abstract class BaseEntity implements Serializable {
     
     
 }
+

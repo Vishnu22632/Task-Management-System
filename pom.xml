@@ -17,6 +17,11 @@
     </properties>
     
     <dependencies>
+       
+
+        
+        
+        
         <dependency>
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
@@ -24,6 +29,12 @@
         </dependency>
 
 
+        <!-- Omnifaces -->
+        <dependency>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>omnifaces</artifactId>
+            <version>3.14</version> 
+        </dependency>
         
         
         <dependency>
@@ -114,3 +125,4 @@
         </plugins>
     </build>
 </project>
+

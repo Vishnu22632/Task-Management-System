@@ -6,6 +6,7 @@
     <persistence-unit name="tmsDS" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>com.synergytech.tms.model.User</class>
+        <class>com.synergytech.tms.model.User</class>
         <jta-data-source>java:/jboss/datasources/tmsDS</jta-data-source>
         <properties>
             <property name="hibernate.show_sql" value="false" />

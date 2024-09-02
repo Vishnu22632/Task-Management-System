@@ -1,9 +1,12 @@
 package com.synergytech.tms.model;
 
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,7 +16,6 @@ public class Task extends BaseEntity {
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long id;
-
     @Column(nullable = false)
     private String taskName;
     @Column(nullable = false)
@@ -23,12 +25,12 @@ public class Task extends BaseEntity {
     @Column(nullable = false)
     private TaskStatus taskStatus;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "project_id", nullable = false)
-//    private Project project; // Many tasks can belong to one project
+    @ManyToOne
+    @JoinColumn(name = "project_id",nullable = false)
+    private Project project; // Many tasks can belong to one project
 
     // Enum for task status
-    public enum TaskStatus{
+    public enum TaskStatus {
 //        NOT_STARTED,
         PENDING,
         IN_PROGRESS,
@@ -36,9 +38,20 @@ public class Task extends BaseEntity {
 //        ON_HOLD,
 //        CANCELLED
     }
+
+   
+    public Task() {
+    }
+
+    public Task(String taskName, String description, TaskStatus taskStatus, Project project) {
+        this.taskName = taskName;
+        this.description = description;
+        this.taskStatus = taskStatus;
+        this.project = project;
+    }
+
     
-    
-    // getter and setter
+     // getter and setter
 
     public String getTaskName() {
         return taskName;
@@ -64,7 +77,49 @@ public class Task extends BaseEntity {
         this.taskStatus = taskStatus;
     }
 
-   
-    
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 31 * hash + Objects.hashCode(this.taskName);
+        hash = 31 * hash + Objects.hashCode(this.description);
+        hash = 31 * hash + Objects.hashCode(this.taskStatus);
+        hash = 31 * hash + Objects.hashCode(this.project);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Task other = (Task) obj;
+        if (!Objects.equals(this.taskName, other.taskName)) {
+            return false;
+        }
+        if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        if (this.taskStatus != other.taskStatus) {
+            return false;
+        }
+        return Objects.equals(this.project, other.project);
+    }
     
 }
+
+
+

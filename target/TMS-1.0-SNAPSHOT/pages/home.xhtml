@@ -54,7 +54,7 @@
 
             <div class="rigth-row" style="width: 80%;">
                 <h:form >
-                    <p style="text-align: center;  font-size: 1.8em; font-weight: bolder;" >HOME</p>
+                    <p style="margin-left: 25px;  font-size: 1.8em; font-weight: bolder;" >HOME</p>
 
                     <p:commandButton styleClass="ui-button-info" type="button" value="Welcome !!! #{userSessionBean.username}" style='font-size: 1.8em;
                                      width: 100%;
@@ -62,76 +62,89 @@
                                      margin-top: 0px;'  />
 
 
-                    <p:panelGrid columns="2" >
-
-                        <h:form id="projectListForm"  >
+                    <h:panelGroup style="display: flex; width: 100%;"  >
 
 
-                            <p:dataTable value="#{projectBean.projects}" var="project"  id="projectTable"
+                        <p:card style="width: 70%;">
 
-                                         paginator="true" rows="5" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                         rowsPerPageTemplate="5,10,15," paginatorPosition="bottom">
-
-                                <p:column headerText="#">
-                                    <p:cellEditor>
-                                        <f:facet name="output"><h:outputText value="#{project.id}" /></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{project.id}" /></f:facet>
-                                    </p:cellEditor>
-                                </p:column>
+                            <h:form id="projectListForm"   >
 
 
-                                <p:column headerText="PROJECT NAME">
-                                    <p:cellEditor>
-                                        <f:facet name="output"><h:outputText value="#{project.name}" /></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{project.name}" /></f:facet>
-                                    </p:cellEditor>
-                                </p:column>
+                                <p:dataTable value="#{projectBean.projects}" var="project"  id="projectTable"
 
-                                <p:column headerText="PROJECT MANAGER">
-                                    <p:cellEditor>
-                                        <f:facet name="output"><h:outputText value="#{project.manager}" /></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{project.manager}" /></f:facet>
-                                    </p:cellEditor>
-                                </p:column>
+                                             paginator="true" rows="5" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15," paginatorPosition="bottom">
+
+                                    <p:column headerText="#">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{project.id}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{project.id}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
 
 
-                                <p:column headerText="START DATE">
-                                    <p:cellEditor>
-                                        <f:facet name="output"><h:outputText value="#{project.startDate}" /></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{project.startDate}" /></f:facet>
-                                    </p:cellEditor>
-                                </p:column>
+                                    <p:column headerText="PROJECT NAME">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{project.name}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{project.name}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
 
-                                <p:column headerText="DUE DATE">
-                                    <p:cellEditor>
-                                        <f:facet name="output"><h:outputText value="#{project.endDate}" /></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{project.endDate}" /></f:facet>
-                                    </p:cellEditor>
-                                </p:column>
-
-                                <p:column headerText="STATUS">
-                                    <p:cellEditor>
-                                        <f:facet name="output"><p:button styleClass="ui-button-info"  value="#{project.status}" style='width: 100px;' /></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{project.status}" /></f:facet>
-                                    </p:cellEditor>
-                                </p:column>
+                                    <p:column headerText="PROJECT MANAGER">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{project.manager}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{project.manager}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
 
 
+                                    <p:column headerText="START DATE">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{project.startDate}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{project.startDate}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="DUE DATE">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{project.endDate}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{project.endDate}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="STATUS">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:button styleClass="ui-button-info"  value="#{project.status}" style='width: 100px;' /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{project.status}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
 
 
-                            </p:dataTable>
 
-                        </h:form>
 
-                        <h:form class="right-row-rc" style="margin-top: 1.5em;"  >
+                                </p:dataTable>
+
+                            </h:form>
+                        </p:card>
+
+
+
+
+
+                        <h:form class="right-row-rc" style="margin-top: 1.5em; width: 30%;"  >
 
                             <p:panelGrid columns="1" style="font-weight: bolder; box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);" >
 
-                                <p:card style="text-align: center; width: 95%; font-size: 1.5em; margin-bottom: 5px; ">
-                                    TOTAL PROJECTS <p:separator /> 
-                                    <p:button styleClass="ui-button-info" value="#{projectBean.totalProjects()}" style="font-size: 1.6em; width: 20%; padding: 5px;"/>
+                                <p:card style="text-align: center; width: 95%; font-size: 1.5em; margin-bottom: 5px;">
+                                    TOTAL PROJECTS 
+                                    <p:separator />
 
+                                    <!-- PrimeFaces Button -->
+                                    <p:button styleClass="ui-button-info" value="#{projectBean.totalProjects()}" style="font-size: 1.6em; width: 20%; padding: 5px;" />
+
+                                    
                                 </p:card>
+
 
                                 <p:card style="text-align: center; width: 95%; font-size: 1.5em; ">
                                     TOTAL TASKS <p:separator /> 
@@ -146,7 +159,10 @@
 
                         </h:form>
 
-                    </p:panelGrid>
+
+
+
+                    </h:panelGroup>>
 
 
 

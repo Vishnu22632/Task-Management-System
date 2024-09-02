@@ -40,10 +40,10 @@ public abstract class BaseRepository<T, ID extends Serializable> {
     public List<T> findAll() {
         return entityManager.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e", entityClass).getResultList();
     }
-    
+
     public long count() {
         return entityManager.createQuery("SELECT COUNT(e) FROM " + entityClass.getSimpleName() + " e", Long.class).getSingleResult();
     }
+    
+    
 }
-
-

@@ -13,4 +13,8 @@ public class ProjectRepository extends BaseRepository<Project, Long> {
     public long countTotalProjects() {
         return count();
     }
+
+    public void delete(Project project) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

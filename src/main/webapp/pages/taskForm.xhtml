@@ -22,31 +22,49 @@
 
 
             <p:card style="width: 80%;" >
-
+                <p:growl id="grl" showDetail="true" showSummary="true" />
                 <h:form id="taskForm">
 
                     <p:fieldset legend="Enter Task Details" style="padding:20px; font-weight: bolder">
                         <h:panelGrid columns="2" cellpadding="5">
+
+
+                            <h:outputLabel for="project" value="Project:" />
+                            <p:selectOneMenu id="project" value="#{taskBean.task.project}" required="true" requiredMessage="Project is Required">
+                                <f:converter converterId="projectConverter" />
+                                <f:selectItem itemLabel="Select Project" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{taskBean.projects}" var="p"
+                                               itemLabel="#{p.name}" itemValue="#{p}" />
+                            </p:selectOneMenu>
+
                             <h:outputLabel for="name" value="Task Name:" />
-                            <p:inputText id="name" size="45" value="#{taskBean.task.taskName}" required="true" />
+                            <p:inputText id="name" size="45" value="#{taskBean.task.taskName}" required="true" >
+                                <p:ajax update="@this" process="@this" />
+                            </p:inputText>
+
 
 
                             <h:outputLabel for="description" value="Description:" />
-                            <p:inputTextarea cols="47" rows="10" id="description" value="#{taskBean.task.description}" />
+                            <p:inputTextarea cols="47" rows="10" id="description" value="#{taskBean.task.description}" >
+
+                                <p:ajax update="@this" process="@this" />
+                            </p:inputTextarea>
+
+
 
 
                             <h:outputLabel for="status" value="Status:" />
                             <p:selectOneMenu id="status" value="#{taskBean.task.taskStatus}">
                                 <f:selectItem itemLabel="Select Status" itemValue="" />
-                                <f:selectItems value="#{taskBean.taskStatusValues}" var="status" itemLabel="#{status}" itemValue="#{status}" />
+                                <f:selectItems value="#{taskBean.taskStatusValues}" var="status"
+                                               itemLabel="#{status}" itemValue="#{status}" />
                             </p:selectOneMenu>
-
-                          
 
                         </h:panelGrid>
 
 
-                        <p:commandButton value="ADD TASK" action="#{taskBean.saveTask()}" update="taskForm" style="margin-right: 4px;" />
+                        <p:commandButton value="ADD TASK" action="#{taskBean.saveTask()}" 
+                                         process="@form" update="@form grl" style="margin-right: 4px;" />
                         <p:commandButton value="Reset"  type="reset" styleClass="ui-button-danger mr-2" />
 
 
@@ -62,3 +80,6 @@
 
     </h:body>
 </html>
+
+
+

@@ -24,12 +24,36 @@ public class ProjectBean implements Serializable {
     @Inject
     private ProjectRepository projectRepository;
 
-     public void saveProject() throws IOException {
-        projectRepository.create(project);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Project Added Successfully!"));
+    // Method to prepare a new project
+    public void prepareNewProject() {
+        this.project = new Project();
+    }
+
+    // Method to handle both add and update
+    public void saveProject() throws IOException {
+        FacesMessage message;
+
+        if (project.getId() == null) {
+            // New project, create it
+            projectRepository.create(project);
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Project Added Successfully!");
+
+        } else {
+            // Existing project, update it
+            projectRepository.update(project);
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Project Updated Successfully!");
+        }
+        
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        
         FacesContext.getCurrentInstance().getExternalContext().redirect("projectList.xhtml");
     }
 
+//     public void saveProject() throws IOException {
+//        projectRepository.create(project);
+//        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Project Added Successfully!"));
+//        FacesContext.getCurrentInstance().getExternalContext().redirect("projectList.xhtml");
+//    }
     public void prepareEditProject(Project selectedProject) {
         this.project = selectedProject;
     }

@@ -1,28 +1,57 @@
 package com.synergytech.tms.model;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "projects")
 public class Project extends BaseEntity {
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "status")
     private String status;
+
+    @Column(name = "startDate")
     private Date startDate;
+
+    @Column(name = "endDate")
     private Date endDate;
+
+    @Column(name = "manager")
     private String manager;
+
+    @Column(name = "teamMembers")
     private String teamMembers;
+
+    @Column(name = "description")
     private String description;
 
-//    @OneToMany(mappedBy = "project")
-//    private List<Task> tasks; // one-to-manay relationship
+    @OneToMany(mappedBy = "project")
+    private List<Task> tasks; // One-to-many relationship
 
-// getter and setter
+    //constructor
+    public Project() {
+    }
 
+    public Project(String name, String status, Date startDate, Date endDate, String manager, String teamMembers, String description, List<Task> tasks) {
+        this.name = name;
+        this.status = status;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.manager = manager;
+        this.teamMembers = teamMembers;
+        this.description = description;
+        this.tasks = tasks;
+    }
+
+    // getter and setter
     public String getName() {
         return name;
     }
@@ -79,11 +108,30 @@ public class Project extends BaseEntity {
         this.description = description;
     }
 
-    
-    
-    
-    
-    
-    
-    
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    @Override
+public int hashCode() {
+    return Objects.hash(this.getId());
 }
+
+@Override
+public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
+    Project other = (Project) obj;
+    return Objects.equals(this.getId(), other.getId());
+}
+
+    
+
+    
+
+}
+

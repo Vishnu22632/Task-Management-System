@@ -17,18 +17,19 @@
 
             <p:card style="width: 80%;">
                 
-                <h:panelGroup style="display: flex; justify-content: flex-end; margin-bottom: 4px;">
-                    <p:button value="Add New Project" icon="pi pi-fw pi-plus" outcome="projectForm.xhtml"  />
-                </h:panelGroup>
-
-                
-                
+                <h:form id="projectActionsForm">
+                    <h:panelGroup style="display: flex; justify-content: flex-end; margin-bottom: 4px;">
+                        <p:commandButton value="Add New Project" icon="pi pi-fw pi-plus"
+                                         oncomplete="PF('editProjectDialog').show()"
+                                         update=":editForm"
+                                         actionListener="#{projectBean.prepareNewProject()}"/>
+                    </h:panelGroup>
+                </h:form>
                 
                 <h:form id="projectListForm">
-                    <p:growl id="message" showDetail="true"/>
+                    <p:growl id="message" showDetail="true" sticky="false" life="3000" />
 
                     <p:dataTable value="#{projectBean.projects}" var="project" editable="true" id="projectTable"
-
                                  paginator="true" rows="5" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  rowsPerPageTemplate="5,10,15,20," paginatorPosition="bottom">
 
@@ -38,7 +39,6 @@
                                 <f:facet name="input"><p:inputText value="#{project.id}" /></f:facet>
                             </p:cellEditor>
                         </p:column>
-
 
                         <p:column headerText="PROJECT NAME">
                             <p:cellEditor>
@@ -60,8 +60,6 @@
                                 <f:facet name="input"><p:inputText value="#{project.teamMembers}" /></f:facet>
                             </p:cellEditor>
                         </p:column>
-
-
 
                         <p:column headerText="START DATE">
                             <p:cellEditor>
@@ -92,49 +90,31 @@
                         </p:column>
 
                         <p:column headerText="Actions">
-
-                            <!--edit button-->
-
                             <p:commandButton icon="pi pi-pencil" styleClass="ui-button-info mr-2" 
                                              action="#{projectBean.prepareEditProject(project)}"
                                              oncomplete="PF('editProjectDialog').show()"
                                              update=":editForm" ajax="true" />
 
-
-
-
-                            <!--<p:commandButton value="Delete"  />-->
-
-                            <p:commandButton  icon="pi pi-trash" action="#{projectBean.deleteProject(project.id)}" style="margin-right: 3px;"  styleClass="ui-button-danger mr-2" >
+                            <p:commandButton  icon="pi pi-trash" action="#{projectBean.deleteProject(project.id)}" style="margin:0 3px;" styleClass="ui-button-danger mr-2">
                                 <p:confirm header="Confirmation" message="Do you want to delete this record?" icon="pi pi-info-circle"/>
                             </p:commandButton>
-                            
-                            
-                            <!--view button-->
-                            <p:commandButton   icon="pi pi-eye" action="projectView.xhtml?faces-redirect=true"   style="background-color: #007bff; color: white;" class="mr-2" >
+
+                            <p:commandButton icon="pi pi-eye" action="projectView.xhtml?faces-redirect=true" style="background-color: #007bff; color: white;" class="mr-2">
                                 <p:confirm header="Confirmation" message="Do you want to View this project?" icon="pi pi-info-circle"/>
                             </p:commandButton>
-
-                            
-                            
-
                         </p:column>
                     </p:dataTable>
-
 
                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
                         <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
                         <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
                     </p:confirmDialog>
-
-
                 </h:form>
 
-                <!-- Edit User Dialog -->
-                <p:dialog header="Edit Project" widgetVar="editProjectDialog" modal="true" resizable="false" width="600">
+                <!-- Edit Project Dialog -->
+                <p:dialog header="Add Or Edit Project" widgetVar="editProjectDialog" modal="true" resizable="false" width="600" style="text-align: center;">
                     <h:form id="editForm">
                         <h:panelGrid columns="2" cellpadding="5">
-
                             <h:outputLabel for="pname" value="Project Name" />
                             <p:inputText id="pname" size="30" value="#{projectBean.project.name}" />
 
@@ -145,7 +125,7 @@
                             <p:inputText id="password" size="30" value="#{projectBean.project.teamMembers}" />
 
                             <h:outputLabel for="status" value="Status:" />
-                            <p:selectOneMenu  id="status" value="#{projectBean.project.status}">
+                            <p:selectOneMenu id="status" value="#{projectBean.project.status}">
                                 <f:selectItem itemLabel="Select Status" itemValue="#{projectBean.project.status}" />
                                 <f:selectItem itemLabel="On-going" itemValue="On-going" />
                                 <f:selectItem itemLabel="Pending" itemValue="Pending" />
@@ -153,34 +133,23 @@
                             </p:selectOneMenu>
 
                             <h:outputLabel for="startDate" value="Start Date:" />
-                            <p:calendar size="30"  id="startDate" value="#{projectBean.project.startDate}" pattern="MM/dd/yyyy" />
+                            <p:calendar size="30" id="startDate" value="#{projectBean.project.startDate}" pattern="MM/dd/yyyy" />
 
                             <h:outputLabel for="endDate" value="End Date:" />
                             <p:calendar size="30" id="endDate" value="#{projectBean.project.endDate}" pattern="MM/dd/yyyy" />
 
-
                             <h:outputLabel for="description" value="Description:" />
-                            <p:inputTextarea cols="32" id="description" value="#{projectBean.project.description}"  />
-
-
+                            <p:inputTextarea cols="32" id="description" value="#{projectBean.project.description}" />
                         </h:panelGrid>
-
-
 
                         <p:commandButton value="Save" action="#{projectBean.updateProject()}" 
                                          oncomplete="PF('editProjectDialog').hide()" 
                                          process="@form"
-                                         update="projectListForm:projectTable"/>
-
-
-
-
-
+                                         update="projectListForm:projectTable , message" />
                     </h:form>
                 </p:dialog>
 
             </p:card>
-
         </div>
     </h:body>
 </html>
