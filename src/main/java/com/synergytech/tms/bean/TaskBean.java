@@ -75,6 +75,7 @@ public class TaskBean implements Serializable {
         if (task.getId() == null) {
             taskRepository.create(task);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Task Added Successfully"));
+            return "projectView?faces-redirect=true";
         } else {
             taskRepository.update(task);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Task Updated Successfully"));

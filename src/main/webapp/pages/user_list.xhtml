@@ -13,20 +13,39 @@
 
 
         <div class="main-container" style="display: flex;
-                width: 100%;">
+             width: 100%;">
 
 
             <ui:include src="panelmenu.xhtml" />
 
             <p:card style="width: 80%;">
-                <h:panelGroup style="display: flex; justify-content: flex-end;">
-                    <p:button value="Add New User" icon="pi pi-fw pi-plus" outcome="signupForm.xhtml" />
-                </h:panelGroup>
-                
-                
+
+
+
+
+
+
+                <h:form>
+                    <h:panelGroup style="display: flex; justify-content: flex-end; margin-bottom: 4px;" >
+                        <p:commandButton value="Add New User" icon="pi pi-fw pi-plus"
+                                         oncomplete="PF('editUserDialog').show()"
+                                         update="editForm"
+                                         />
+                    </h:panelGroup>
+                </h:form>
+                <!--                <h:panelGroup style="display: flex; justify-content: flex-end;">
+                                    <p:button value="Add New User" icon="pi pi-fw pi-plus" outcome="signupForm.xhtml" />
+                                </h:panelGroup>-->
+
+
 
                 <h:form id="userListForm">
-                    <p:growl id="message" showDetail="true"/>
+
+
+                    <!--displaying message when saved-->
+                    <p:growl id="grl" showDetail="true" showSummary="true" life="2000" />
+
+                    <!--<p:growl id="message" showDetail="true"/>-->
 
                     <p:dataTable value="#{userBean.users}" var="user" editable="true" id="userTable"
                                  paginator="true" rows="5" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -81,8 +100,8 @@
                                              oncomplete="PF('editUserDialog').show()"
                                              update=":editForm" ajax="true" />
 
-                            <p:commandButton  icon="pi pi-trash"  action="#{userBean.deleteUser(user.id)}" style="margin-left:5px;"   styleClass="ui-button-danger " >
-                                <p:confirm header="Confirmation" message="Do you want to delete this record?" icon="pi pi-info-circle"/>
+                            <p:commandButton  icon="pi pi-trash"   action="#{userBean.deleteUser(user.id)}" update="userListForm:userTable,:userListForm:grl" style="margin-left:5px;"   styleClass="ui-button-danger " >
+                                <p:confirm header="Confirmation"  message="Do you want to delete this record?" icon="pi pi-info-circle"/>
                             </p:commandButton>
 
                         </p:column>
@@ -96,31 +115,34 @@
                 </h:form>
 
                 <!-- Edit User Dialog -->
-                <p:dialog header="Edit User" widgetVar="editUserDialog" modal="true" resizable="false" width="500">
+                <p:dialog header="Add Or Edit User" widgetVar="editUserDialog" modal="true" resizable="false" width="550" style="text-align: center; ">
+                    <p:separator />
                     <h:form id="editForm">
-                        <h:panelGrid columns="2" cellpadding="5">
+                        <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
 
-                            <h:outputLabel for="fullName" value="Full Name" />
-                            <p:inputText id="fullName" value="#{userBean.user.fullName}" />
+                            <h:outputLabel for="fullName" value="Full Name : " />
+                            <p:inputText id="fullName" size="30" value="#{userBean.user.fullName}" />
 
                             <h:outputLabel for="email" value="Email" />
-                            <p:inputText id="email" value="#{userBean.user.email}" />
+                            <p:inputText id="email" size="30" value="#{userBean.user.email}" />
 
                             <h:outputLabel for="password" value="Password" />
-                            <p:inputText id="password" value="#{userBean.user.password}" />
+                            <p:inputText id="password" size="30" value="#{userBean.user.password}" />
 
                             <h:outputLabel for="userRole" value="User Role" />
-                            <p:inputText id="userRole" value="#{userBean.user.userRole}" />
+                            <p:inputText id="userRole" size="30" value="#{userBean.user.userRole}" />
 
                             <h:outputLabel for="address" value="Address" />
-                            <p:inputText id="address" value="#{userBean.user.address}" />
+                            <p:inputText id="address" size="30" value="#{userBean.user.address}" />
 
                         </h:panelGrid>
 
-                        <p:commandButton value="Save" action="#{userBean.updateUser()}" 
+                        <p:commandButton value="Save" action="#{userBean.saveOrUpdateUser()}" 
                                          oncomplete="PF('editUserDialog').hide()" 
                                          process="@form"
-                                         update=":userListForm:userTable"/>
+                                         update=":userListForm:userTable, :userListForm:grl"/>
+
+
 
                     </h:form>
                 </p:dialog>
