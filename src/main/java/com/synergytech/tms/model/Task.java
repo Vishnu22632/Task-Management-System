@@ -24,6 +24,9 @@ public class Task extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TaskStatus taskStatus;
+    
+    
+    
 
     @ManyToOne
     @JoinColumn(name = "project_id", nullable = false)

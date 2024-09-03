@@ -7,6 +7,10 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>TMS - AllProjects</title>
+
+        
+
+
     </h:head>
     <h:body>
         <ui:include src="menu.xhtml" />
@@ -47,23 +51,25 @@
                             </p:cellEditor>
                         </p:column>
 
-                        
+
 
                         <p:column headerText="TOTAL TASKS">
                             <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="" /></f:facet>
-                                <f:facet name="input"><p:inputText value="" /></f:facet>
+                                <f:facet name="output">
+                                    <h:outputText value="#{project.taskCount}"  />
+                                </f:facet>
+                                <f:facet name="input"><p:inputText value="#{project.taskCount}" disabled="true" /></f:facet>
                             </p:cellEditor>
                         </p:column>
 
-<!--                        <p:column headerText="COMPLETED TASKS">
+                        <p:column headerText="COMPLETED TASKS">
                             <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="" /></f:facet>
-                                <f:facet name="input"><p:inputText value="" /></f:facet>
+                                <f:facet name="output"><h:outputText value="#{project.completedTaskCount}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{project.completedTaskCount}" disabled="true" /></f:facet>
                             </p:cellEditor>
-                        </p:column>-->
+                        </p:column>
 
-                        <p:column headerText="PROGRESS">
+                        <p:column headerText="PROGRESS [%]">
                             <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="" /></f:facet>
                                 <f:facet name="input"><p:inputText value="" /></f:facet>
@@ -74,15 +80,16 @@
 
                         <p:column headerText="STATUS">
                             <p:cellEditor>
-                                <f:facet name="output">
+                                <f:facet name="output" >
+
+
                                     <p:commandButton value="#{project.status}" 
-                                                     styleClass="ui-button-primary" 
-                                                     
+                                                     styleClass="custom-button-success"
                                                      disabled="true" 
                                                      style="width: 60%; text-align: center; " />
                                 </f:facet>
                                 <f:facet name="input">
-                                    <p:inputText value="#{project.status}" style="width: 100%;" />
+                                    <p:inputText value="#{project.status}" style="width: 60%;" />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>

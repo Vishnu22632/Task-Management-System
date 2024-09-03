@@ -6,6 +6,7 @@ import com.synergytech.tms.repository.ProjectRepository;
 import com.synergytech.tms.repository.TaskRepository;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 
 import javax.faces.context.FacesContext;
@@ -43,6 +44,18 @@ public class ProjectBean implements Serializable {
 
     public void setEditing(boolean editing) {
         this.editing = editing;
+    }
+    
+    
+    @PostConstruct
+    public void init() {
+        projects = projectRepository.findAll();
+        projects.forEach(project -> {
+            Long taskCount = taskRepository.countTasksByProject(project.getId());
+            Long completedTaskCount = taskRepository.countCompletedTasksByProject(project.getId());
+            project.setTaskCount(taskCount);
+            project.setCompletedTaskCount(completedTaskCount);
+        });
     }
 
     public String saveOrUpdateProject() {

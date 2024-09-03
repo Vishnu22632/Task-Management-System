@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "projects")
@@ -35,6 +36,36 @@ public class Project extends BaseEntity {
 
     @OneToMany(mappedBy = "project")
     private List<Task> tasks; // One-to-many relationship
+    
+    // for holding tasks count on each project
+    @Transient
+    private Long taskCount;
+
+    @Transient
+    private Long completedTaskCount;
+    
+    
+    public Long getTaskCount() {
+        return taskCount;
+    }
+
+    
+    public void setTaskCount(Long taskCount) {
+        this.taskCount = taskCount;
+    }
+
+    public Long getCompletedTaskCount() {
+        return completedTaskCount;
+    }
+
+    public void setCompletedTaskCount(Long completedTaskCount) {
+        this.completedTaskCount = completedTaskCount;
+    }
+    
+    
+    
+    
+    
 
     //constructor
     public Project() {
