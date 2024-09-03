@@ -6,44 +6,99 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>TMS -- ViewProject</title>
+        <title>TMS - AllProjects</title>
     </h:head>
     <h:body>
-
         <ui:include src="menu.xhtml" />
 
-        <div class="main-container" style="display: flex;
-             width: 100%;">
-
+        <div class="main-container" style="display: flex; width: 100%;">
 
             <ui:include src="panelmenu.xhtml" />
 
             <p:card style="width: 80%;">
 
+                <h:form id="projectActionsForm">
+                    <h:panelGroup style="display: flex; justify-content: flex-end; margin-bottom: 4px;">
+                        <p:commandButton value="PRINT" icon="pi pi-fw pi-plus"
+                                         oncomplete="PF('editProjectDialog').show()"
+                                         update=""
+                                         actionListener="#{projectBean.prepareNewProject()}"/>
+                    </h:panelGroup>
+                </h:form>
 
-                <p:panel header="Display Project Report" style="width: 100%; border: 2px solid blueviolet; height: 40vh; margin-bottom: 5px; text-align: center; ">
+                <h:form id="projectListForm">
+                    <p:growl id="grl" showDetail="true" sticky="false" life="2000" />
 
-                </p:panel>
+                    <p:dataTable value="#{projectBean.projects}" var="project" editable="true" id="projectTable"
+                                 paginator="true" rows="5" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15,20," paginatorPosition="bottom">
+
+                        <p:column headerText="#PID">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{project.id}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{project.id}" /></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="PROJECT NAME">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{project.name}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{project.name}" /></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        
+
+                        <p:column headerText="TOTAL TASKS">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="" /></f:facet>
+                                <f:facet name="input"><p:inputText value="" /></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+<!--                        <p:column headerText="COMPLETED TASKS">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="" /></f:facet>
+                                <f:facet name="input"><p:inputText value="" /></f:facet>
+                            </p:cellEditor>
+                        </p:column>-->
+
+                        <p:column headerText="PROGRESS">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="" /></f:facet>
+                                <f:facet name="input"><p:inputText value="" /></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+
+
+                        <p:column headerText="STATUS">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <p:commandButton value="#{project.status}" 
+                                                     styleClass="ui-button-primary" 
+                                                     
+                                                     disabled="true" 
+                                                     style="width: 60%; text-align: center; " />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{project.status}" style="width: 100%;" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
 
 
 
 
+                    </p:dataTable>
 
-                <!--Display Task List-->
-
-                
-
-                <!-- Edit Task Dialog -->
-
-               
-                
-                
-
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
+                    </p:confirmDialog>
+                </h:form>
 
             </p:card>
-
-
         </div>
-
     </h:body>
 </html>

@@ -149,7 +149,8 @@
                                          action="#{projectBean.saveOrUpdateProject()}" 
                                          oncomplete="PF('editProjectDialog').hide()" 
                                          process="@form"
-                                         update=":projectListForm:projectTable , :projectListForm:grl" />
+                                         update=":projectListForm:projectTable , :projectListForm:grl"
+                                         ajax="true"  />
                     </h:form>
                 </p:dialog>
 

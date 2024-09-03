@@ -61,46 +61,14 @@ public class TaskBean implements Serializable {
         return List.of(Task.TaskStatus.values());
     }
     
-    /*
-    
-    // Save task
-   public String saveTask() {
-    try {
-        // Check if the project is null or its ID is null
-        System.err.println(task.getProject());
-        if (task.getProject() == null || task.getProject().getId() == null) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Project is required "));
-            return null;
-        }
-
-        if (task.getId() == null) {
-            taskRepository.create(task);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Task Added Successfully"));
-            return "projectView?faces-redirect=true";
-        } else {
-            taskRepository.update(task);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Task Updated Successfully"));
-        }
-
-        tasks = taskRepository.findAll(); // Refresh the task list
-
-        return "viewProject?faces-redirect=true";
-
-    } catch (Exception e) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage()));
-        e.printStackTrace();
-        return null;
-    }
-}
-
-*/
+   
     
      // Unified save or update task method
-    public String saveOrUpdateTask() {
+    public void saveOrUpdateTask() {
         try {
             if (task.getProject() == null || task.getProject().getId() == null) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Project is required"));
-                return null;
+//                return null;
             }
 
             if (task.getId() == null) {
@@ -112,20 +80,22 @@ public class TaskBean implements Serializable {
             }
 
             tasks = taskRepository.findAll(); // Refresh the task list
-            return "taskList.xhtml?faces-redirect=true"; // Redirect to taskList.xhtml
+           
+//            return "taskList.xhtml?faces-redirect=true"; // Redirect to taskList.xhtml
 
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage()));
             e.printStackTrace();
-            return null;
+//            return null;
         }
     }
     
 
     public String deleteTask(Long id) {
         taskRepository.delete(id);
-        
-        return "listTask?faces-redirect=true";
+        addMessage("Success", "Task deleted successfully !!!");
+//        return "listTask?faces-redirect=true";
+          return null;
     }
 
 //    public String updateTask() {

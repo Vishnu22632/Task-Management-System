@@ -26,7 +26,7 @@ public class Task extends BaseEntity {
     private TaskStatus taskStatus;
 
     @ManyToOne
-    @JoinColumn(name = "project_id",nullable = false)
+    @JoinColumn(name = "project_id", nullable = false)
     private Project project; // Many tasks can belong to one project
 
     // Enum for task status
@@ -39,7 +39,6 @@ public class Task extends BaseEntity {
 //        CANCELLED
     }
 
-   
     public Task() {
     }
 
@@ -50,9 +49,7 @@ public class Task extends BaseEntity {
         this.project = project;
     }
 
-    
-     // getter and setter
-
+    // getter and setter
     public String getTaskName() {
         return taskName;
     }
@@ -118,8 +115,5 @@ public class Task extends BaseEntity {
         }
         return Objects.equals(this.project, other.project);
     }
-    
+
 }
-
-
-
